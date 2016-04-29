@@ -1,0 +1,40 @@
+package cs.comp2100.edu.au.numbercruncher.calculator.parser.arithmeticExps;
+
+import nonterminals.abstracts.BinaryNonTerminal;
+import nonterminals.abstracts.Features;
+import nonterminals.abstracts.NonTerminal;
+
+/**
+ * Created by sina on 4/28/16.
+ */
+public class ExponentialExp extends BinaryNonTerminal<Float> {
+    public ExponentialExp(String expression) {
+        super(expression, Features.ARITHMETICOPERATORS);
+        this.operators = new String[]{"^"};
+    }
+
+    @Override
+    public NonTerminal createNonTerminalLeft(String expression) {
+        Factor factor = new Factor(expression);
+        factor.decompose();
+        return factor;
+    }
+
+    @Override
+    public NonTerminal createNonTerminalRight(String expression) {
+        ExponentialExp exp = new ExponentialExp(expression);
+        exp.decompose();
+        return exp;
+    }
+
+    @Override
+    public Float calculateValue() {
+        if (operator== null)
+            return (Float) this.left.calculateValue();
+        switch (operator) {
+            case "^":
+                return (float) Math.pow((Float)this.left.calculateValue(), (Float)this.right.calculateValue());
+        }
+        return null;
+    }
+}
