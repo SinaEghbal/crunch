@@ -32,7 +32,7 @@ public class LogicalExpression extends BinaryNonTerminal<Boolean> {
         if (right==null)
             return (Boolean) left.calculateValue();
         else
-            return (!(boolean)left.calculateValue() || (boolean)right.calculateValue()) &&
-        (!(boolean)right.calculateValue() || (boolean)left.calculateValue());
+            return (!(Boolean)left.calculateValue() || (Boolean)right.calculateValue()) &&
+        (!(Boolean)right.calculateValue() || (Boolean)left.calculateValue());
     }
 }

@@ -31,10 +31,12 @@ public class ExponentialExp extends BinaryNonTerminal<Float> {
     public Float calculateValue() {
         if (operator== null)
             return (Float) this.left.calculateValue();
-        switch (operator) {
-            case "^":
-                return (float) Math.pow((Float)this.left.calculateValue(), (Float)this.right.calculateValue());
-        }
+        else if (operator.equals("^"))
+            return (float) Math.pow((Float)this.left.calculateValue(), (Float)this.right.calculateValue());
+//        switch (operator) {
+//            case "^":
+//                return (float) Math.pow((Float)this.left.calculateValue(), (Float)this.right.calculateValue());
+//        }
         return null;
     }
 }

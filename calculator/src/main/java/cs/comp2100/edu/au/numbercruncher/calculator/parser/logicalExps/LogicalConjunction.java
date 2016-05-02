@@ -34,6 +34,6 @@ public class LogicalConjunction extends BinaryNonTerminal<Boolean> {
         if (right==null)
             return (Boolean) left.calculateValue();
         else
-            return (boolean)left.calculateValue() && (boolean)right.calculateValue();
+            return (Boolean)left.calculateValue() && (Boolean) right.calculateValue();
     }
 }

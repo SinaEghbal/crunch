@@ -10,7 +10,7 @@ public abstract class NonTerminal<T> {
     protected String operator;
     protected T value;
 
-    public abstract T calculateValue();
+    public abstract <T> T calculateValue();
 
     public NonTerminal(String expression) {
         expression = expression.replace(" ", "");

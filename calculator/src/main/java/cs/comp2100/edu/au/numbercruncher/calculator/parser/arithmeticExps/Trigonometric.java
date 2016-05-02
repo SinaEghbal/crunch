@@ -22,16 +22,16 @@ public class Trigonometric extends UnaryNonTerminal<Float> {
     @Override
     public Float calculateValue() {
         if (expression.startsWith("cos")) {
-            return (float)Math.cos((float)operand.calculateValue());
+            return Float.valueOf((float) Math.cos((Float)operand.calculateValue()));
         } else if (expression.startsWith("sin")) {
-            return (float)Math.sin((float)operand.calculateValue());
+            return Float.valueOf((float) Math.sin((Float)operand.calculateValue()));
         } else if (expression.startsWith("tan")) {
-            return (float)Math.tan((float)operand.calculateValue());
+            return Float.valueOf((float) Math.tan((Float)operand.calculateValue()));
         } else if (expression.startsWith("sqr")) {
-            return (float)Math.sqrt((float)operand.calculateValue());
+            return Float.valueOf((float) Math.sqrt((Float)operand.calculateValue()));
         } else if (expression.startsWith("rec")) {
-            return (float)1.0/(float)operand.calculateValue();
+            return Float.valueOf((float) (1.0/(Float)operand.calculateValue()));
         }
-        return (float)-1.0;
+        return Float.valueOf((float)-1.0);
     }
 }

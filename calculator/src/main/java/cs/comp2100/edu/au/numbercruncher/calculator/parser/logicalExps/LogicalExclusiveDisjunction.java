@@ -31,9 +31,9 @@ public class LogicalExclusiveDisjunction extends BinaryNonTerminal<Boolean> {
     @Override
     public Boolean calculateValue() {
         if (right==null)
-            return (boolean)left.calculateValue();
+            return (Boolean)left.calculateValue();
         else
-            return (((boolean)left.calculateValue()&&!(boolean)right.calculateValue()) ||
-                    (boolean)right.calculateValue()&&!(boolean)left.calculateValue());
+            return (((Boolean)left.calculateValue()&&!(Boolean)right.calculateValue()) ||
+                    (Boolean)right.calculateValue()&&!(Boolean)left.calculateValue());
     }
 }
