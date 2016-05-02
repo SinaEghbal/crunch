@@ -5,3 +5,12 @@
 .DS_Store
 /build
 /captures
+.idea
+/*/local.properties
+*.iml
+*.iws
+*.ipr
+*~
+*.swp
+/*/*/build
+/*/*/production
