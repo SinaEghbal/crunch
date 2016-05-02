@@ -1,7 +1,5 @@
 package cs.comp2100.edu.au.numbercruncher.calculator.parser.abstracts;
 
-import nonterminals.abstracts.NonTerminal;
-
 public abstract class UnaryNonTerminal<T> extends NonTerminal {
 
     public NonTerminal operand;

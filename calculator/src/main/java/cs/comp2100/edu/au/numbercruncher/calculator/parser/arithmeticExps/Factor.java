@@ -1,6 +1,6 @@
 package cs.comp2100.edu.au.numbercruncher.calculator.parser.arithmeticExps;
 
-import nonterminals.abstracts.UnaryNonTerminal;
+import cs.comp2100.edu.au.numbercruncher.calculator.parser.abstracts.UnaryNonTerminal;
 
 /**
  * Created by sina on 4/28/16.

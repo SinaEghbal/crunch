@@ -1,9 +1,9 @@
 package cs.comp2100.edu.au.numbercruncher.calculator.parser.logicalExps;
 
-import nonterminals.abstracts.BinaryNonTerminal;
-import nonterminals.abstracts.Features;
-import nonterminals.abstracts.NonTerminal;
-import nonterminals.abstracts.UnaryNonTerminal;
+import cs.comp2100.edu.au.numbercruncher.calculator.parser.abstracts.BinaryNonTerminal;
+import cs.comp2100.edu.au.numbercruncher.calculator.parser.abstracts.Features;
+import cs.comp2100.edu.au.numbercruncher.calculator.parser.abstracts.NonTerminal;
+import cs.comp2100.edu.au.numbercruncher.calculator.parser.abstracts.UnaryNonTerminal;
 
 /**
  * Created by sina on 4/29/16.
