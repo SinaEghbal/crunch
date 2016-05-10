@@ -4,11 +4,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.*;
 
-import android.widget.Toast;
 import au.edu.anu.cs.crunch.parser.abstracts.Features;
 import au.edu.anu.cs.crunch.parser.arithmeticExps.Expression;
 import au.edu.anu.cs.crunch.persistent_history.CalculatorDB;
@@ -25,6 +22,7 @@ public class HomeActivity extends AppCompatActivity {
     DBHelper calculatorHelper;
     Spinner history;
     String tableName;
+    boolean answer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,13 +30,29 @@ public class HomeActivity extends AppCompatActivity {
         screen = (TextView)findViewById(R.id.txtViewScreen);
         calculatorHelper = new DBHelper(this);
         history = (Spinner) findViewById(R.id.spinner_history);
+        //OnClick Listener for the spinner
+        history.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String expression = history.getSelectedItem().toString();
+                screen.setText(expression);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                return;
+            }
+        });
+        //For arithmetic expression. Should be changed for the logical expressions.
         tableName = CalculatorDB.Arithmetic.TABLE_NAME;
         loadSpinner();
+        answer = false;
     }
 
     protected void loadSpinner() {
         Cursor previousExpressions = calculatorHelper.getExpressions(tableName);
         List<String> expressionList = new ArrayList<String>();
+        expressionList.add("");
         while (previousExpressions.moveToNext()) {
             expressionList.add(previousExpressions.getString(1));
         }
