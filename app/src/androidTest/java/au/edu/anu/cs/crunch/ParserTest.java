@@ -5,6 +5,7 @@ import android.test.ApplicationTestCase;
 
 import au.edu.anu.cs.crunch.parser.abstracts.NonTerminal;
 import au.edu.anu.cs.crunch.parser.arithmeticExps.Expression;
+import au.edu.anu.cs.crunch.parser.logicalExps.LogicalExpression;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -69,5 +70,22 @@ public class ParserTest extends ApplicationTestCase<Application>{
         Assert.assertTrue("Expression should evaluate to -10 not " + valueTwo.toString(), valueTwo == -10.0);
         Assert.assertTrue("Expression should evaluate to -100,000 not " + valueThree.toString(), valueThree == -100000.0);
         Assert.assertTrue("Expression should evaluate to 1 not " + valueFour.toString(), valueFour == 1.0);
+    }
+
+    public void complicatedExpressionTest() {
+        NonTerminal test = new Expression("3 + 4 * 2 / (1 - 5)^2^3");
+        test.decompose();
+        assertEquals(test.calculateValue(), "3.00195");
+        test = new Expression("sin(0)/tan(12)^sqr(5)-rec(1)");
+        test.decompose();
+        assertEquals(test.calculateValue(),"NaN");
+    }
+    public void logicalExpressionTest() {
+        NonTerminal test = new LogicalExpression("false^true");
+        test.decompose();
+        assertEquals(test.calculateValue(), "false");
+        test = new LogicalExpression("false^true>false=(true|false)&false");
+        test.decompose();
+        assertEquals(test.calculateValue(), "false");
     }
 }
