@@ -36,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String expression = history.getSelectedItem().toString();
                 screen.setText(expression);
+                answer = true;
             }
 
             @Override
@@ -84,6 +85,7 @@ public class HomeActivity extends AppCompatActivity {
 //    }
 
     public void buttonOnClick(View view) {
+        answer = false;
         String no = "";
         switch (view.getId()) {
             case R.id.btn_0:
@@ -145,8 +147,12 @@ public class HomeActivity extends AppCompatActivity {
                 break;
             case R.id.btn_delete:
                 if (screen.getText().length() > 0) {
-                    screen.setText(screen.getText().toString().substring(0,
+                    if (!answer)
+                        screen.setText(screen.getText().toString().substring(0,
                             screen.getText().toString().length()-1));
+                    else
+                        screen.setText("");
+                    answer = false;
                 }
                 break;
             case R.id.btn_sign:
@@ -158,6 +164,7 @@ public class HomeActivity extends AppCompatActivity {
                 } else {
                     screen.setText("-");
                 }
+                answer = false;
                 break;
             case R.id.btn_history:
                 //TODO -> implement a db for the history
@@ -167,10 +174,15 @@ public class HomeActivity extends AppCompatActivity {
                     String expString = screen.getText().toString();
                     Expression exp = new Expression(expString);
                     exp.decompose();
-                    if (Features.isExpression(expString, Features.ARITHMETICOPERATORS))
+                    if (!answer) {
                         calculatorHelper.insertExpression(expString, tableName);
-                    loadSpinner();
+                        loadSpinner();
+                    }
+//                    if (Features.isExpression(expString, Features.ARITHMETICOPERATORS))
+//                        calculatorHelper.insertExpression(expString, tableName);
+//                    loadSpinner();
                     screen.setText(String.valueOf(exp.calculateValue()));
+                    answer = true;
                 } catch (Exception e) {
                     Toast.makeText(getBaseContext(), "Unparsable Expression", Toast.LENGTH_LONG).show();
                 }
