@@ -12,7 +12,10 @@ import java.util.Random;
  * Created by sina on 5/3/16.
  */
 public class DBHelper extends SQLiteOpenHelper {
-
+    /* Our database helper.
+    * This class will be used to store the persistent data; here history of calculated expressions.
+    * The database created by this class will contain two tables for logical expressions
+    * and arithmetic expression.*/
     public static final int DATABASE_VERSION = 1;
 
     public static final String DATABASE_NAME = "Calculator";
@@ -36,6 +39,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     @Override
+    /* Creates the table in the db */
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE);
     }
@@ -46,12 +50,14 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /* Gets all the expressions for the given table */
     public Cursor getExpressions(String tableName) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + tableName, null);
         return res;
     }
 
+    /* Insert the given expression into the given table */
     public void insertExpression(String expression, String tableName) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();

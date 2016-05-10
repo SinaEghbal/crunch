@@ -8,6 +8,8 @@ import java.util.Arrays;
  * Created by sina on 4/29/16.
  */
 public abstract class BinaryNonTerminal<T> extends NonTerminal {
+    /* This class extends NonTerminal and will be extended by all the binary operators
+    * we will implement. */
     protected final String[] OPERATORS;// = new String[]{"+", "-", "*", "/", "^"};
     protected NonTerminal left;
     protected NonTerminal right;
@@ -18,12 +20,18 @@ public abstract class BinaryNonTerminal<T> extends NonTerminal {
         this.OPERATORS = operators;
     }
 
+    /* This is an abstract method. This will be a factory method which creates a non-terminal
+    * based on the right non-terminal of a binary operator in the grammar. */
     protected abstract NonTerminal createNonTerminalRight(String expression);
+    /* Like the above, A factory method which creates non-terminal specified for each binary
+     * non terminal on its left. */
     protected abstract NonTerminal createNonTerminalLeft(String expression);
 
-    public abstract T calculateValue();
-
     public void decompose() {
+        /* This method decomposes a non-terminal.
+        * This means that will first find the parentheses and consider them as a single expression
+        * also given the operators of every b-non terminal, it will find them in the expression
+        * and decomposes the non-terminal into two non-terminals. */
 //        String expression = this.expression;
         int separator = -1;
         int index = 0;
@@ -56,8 +64,13 @@ public abstract class BinaryNonTerminal<T> extends NonTerminal {
         }
         value = calculateValue();
     }
-//
+
+    /* This method will be called in the end of the decompose method to calculate the value of each non-terminal*/
+    public abstract T calculateValue();
+
+    //
     public int countMatches(String string, String subString) {
+        /* Just count the matches of a substring in another string(1st string). */
         int lastIndex = 0;
         int count = 0;
 

@@ -8,6 +8,8 @@ import au.edu.anu.cs.crunch.parser.abstracts.NonTerminal;
  * Created by sina on 4/29/16.
  */
 public class LogicalExpression extends BinaryNonTerminal<Boolean> {
+    /* Lowest priority, bidirectional implication. true <-> true = true
+    * a <-> b means (~a or b) and (~b or a)*/
     public LogicalExpression(String expression) {
         super(expression, Features.LOGICALOPERATORS);
         this.operators = new String[] {"="};

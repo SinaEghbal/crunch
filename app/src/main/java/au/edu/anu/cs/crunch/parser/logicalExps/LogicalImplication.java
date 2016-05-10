@@ -8,6 +8,8 @@ import au.edu.anu.cs.crunch.parser.abstracts.NonTerminal;
  * Created by sina on 4/29/16.
  */
 public class LogicalImplication extends BinaryNonTerminal<Boolean> {
+    /* Logical implication which has the second lowest priority.
+    * a -> b = ~a or b */
     public LogicalImplication(String expression) {
         super(expression, Features.LOGICALOPERATORS);
         this.operators = new String[] {">"};

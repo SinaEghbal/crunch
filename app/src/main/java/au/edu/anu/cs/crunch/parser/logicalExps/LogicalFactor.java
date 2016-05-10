@@ -6,7 +6,8 @@ import au.edu.anu.cs.crunch.parser.abstracts.UnaryNonTerminal;
  * Created by sina on 4/29/16.
  */
 public class LogicalFactor extends UnaryNonTerminal {
-
+    /* The non terminal with the highest priority.
+    * Can be negation of a formula or a single atom */
     Boolean neg = false;
 
     public LogicalFactor(String expression) {

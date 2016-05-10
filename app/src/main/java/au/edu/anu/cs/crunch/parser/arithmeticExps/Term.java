@@ -8,7 +8,8 @@ import au.edu.anu.cs.crunch.parser.abstracts.NonTerminal;
  * Created by sina on 4/27/16.
  */
 public class Term extends BinaryNonTerminal<Float> {
-
+    /* Term has the second lowest priority in our grammar, it implements *, /, and %(modulus)
+    * operators*/
     public Term(String expression) {
         super(expression, Features.ARITHMETICOPERATORS);
         this.operators = new String[]{"*", "/", "%"};

@@ -5,6 +5,7 @@ package au.edu.anu.cs.crunch.parser.abstracts;
  */
 
 public abstract class NonTerminal<T> {
+    /* This is an abstract class which non-terminals extend.*/
     protected String expression;
     protected String[] operators;
     protected String operator;

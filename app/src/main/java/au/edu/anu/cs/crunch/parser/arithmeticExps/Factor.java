@@ -6,6 +6,9 @@ import au.edu.anu.cs.crunch.parser.abstracts.UnaryNonTerminal;
  * Created by sina on 4/28/16.
  */
 public class Factor extends UnaryNonTerminal<Float> {
+    /* Only unary non-terminal for arithmetic expressions.
+    * Factor can be in form of
+    * (exp), Number, -exp */
     float scalar = 1;
     public Factor(String expression) {
         super(expression);
@@ -21,6 +24,7 @@ public class Factor extends UnaryNonTerminal<Float> {
 
     @Override
     public void decompose() {
+        /* Decomposes the factor, if decomposable.*/
         if (expression.startsWith("(")) {
             String new_expression = expression.substring(1, expression.length()-1);
             operand = new Expression(new_expression);

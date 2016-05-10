@@ -13,6 +13,12 @@ import au.edu.anu.cs.crunch.persistent_history.DBHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by sina on 5/10/16.
+ * Boris Repasky, Sina Eghbal
+ * This code is published under GNU Public License 2.0
+ */
+
 public class HomeActivity extends AppCompatActivity {
 
     TextView screen;
@@ -20,6 +26,7 @@ public class HomeActivity extends AppCompatActivity {
     Spinner history;
     String tableName;
     boolean answer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +40,9 @@ public class HomeActivity extends AppCompatActivity {
         history.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                /* When an item is selected in the spinner, print it on the screen. */
                 if (position!=0) {
+                    /* Not when you load the spinner though. */
                     String expression = history.getSelectedItem().toString();
                     screen.setText(expression);
                     answer = true;
@@ -41,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
             }
 
             @Override
+            /* When nothing is selected. I think this cannot happen unless the adapter is empty. ;)*/
             public void onNothingSelected(AdapterView<?> parent) {
                 return;
             }
@@ -50,10 +60,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     protected void loadSpinner() {
-        /*loads the history spinner.
-        * adds an empty item which will be the default selected item.*/
+        /* loads the history spinner.
+        * adds an empty item which will be the default selected item. */
         Cursor previousExpressions = calculatorHelper.getExpressions(tableName);
         List<String> expressionList = new ArrayList<String>();
+        /* Basically a placeholder when we populate the spinner. */
         expressionList.add("");
         while (previousExpressions.moveToNext()) {
             expressionList.add(previousExpressions.getString(1));
@@ -182,6 +193,7 @@ public class HomeActivity extends AppCompatActivity {
                     Expression exp = new Expression(expString);
                     exp.decompose();
                     if (!answer) {
+                        /* if it's not an answer write it to the db. */
                         calculatorHelper.insertExpression(expString, tableName);
                     }
                     loadSpinner();
