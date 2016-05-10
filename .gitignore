@@ -3,8 +3,15 @@
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
+<<<<<<< HEAD
 /.idea/gradle.xml
 /.idea/misc.xml
+=======
+/.idea/runConfigurations.xml
+/.idea/misc.xml
+/.idea/gradle.xml
+/.idea/.name
+>>>>>>> a66e271c9289e1e84ed38986d9f98045a9419988
 .DS_Store
 /build
 /captures
