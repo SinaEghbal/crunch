@@ -13,7 +13,6 @@ import au.edu.anu.cs.crunch.persistent_history.DBHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class HomeActivity extends AppCompatActivity {
 
     TextView screen;
@@ -51,6 +50,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     protected void loadSpinner() {
+        /*loads the history spinner.
+        * adds an empty item which will be the default selected item.*/
         Cursor previousExpressions = calculatorHelper.getExpressions(tableName);
         List<String> expressionList = new ArrayList<String>();
         expressionList.add("");
@@ -84,7 +85,9 @@ public class HomeActivity extends AppCompatActivity {
 //        return super.onOptionsItemSelected(item);
 //    }
 
-    public void buttonOnClick(View view) {
+    public void keypadOnClick(View view) {
+        /*Implementation for the keypad buttons.
+        * implements the functionality of the keypad keys based on the key id.*/
         answer = false;
         String no = "";
         switch (view.getId()) {
@@ -140,8 +143,10 @@ public class HomeActivity extends AppCompatActivity {
         screen.setText(screen.getText().toString()+no);
     }
 
-    public void buttonOperation(View view) {
+    public void operationOnClick(View view) {
+        /*Implementation for the operation buttons such as =, c, <-.*/
         switch (view.getId()) {
+            /*switches the button id and runs the functionality of the key accordingly*/
             case R.id.btn_clear:
                 screen.setText("");
                 break;
@@ -171,6 +176,8 @@ public class HomeActivity extends AppCompatActivity {
                 break;
             case R.id.btn_result:
                 try {
+                    /*We'll evaluate the string on our screen and calculate the result if it is
+                    * parsable*/
                     String expString = screen.getText().toString();
                     Expression exp = new Expression(expString);
                     exp.decompose();
@@ -178,12 +185,21 @@ public class HomeActivity extends AppCompatActivity {
                         calculatorHelper.insertExpression(expString, tableName);
                     }
                     loadSpinner();
-                    screen.setText(String.valueOf(exp.calculateValue()));
+                    screen.setText(trimInteger(String.valueOf(exp.calculateValue())));
                     answer = true;
                 } catch (Exception e) {
-                    Toast.makeText(getBaseContext(), "Unparsable Expression", Toast.LENGTH_LONG).show();
+                    /*If the string is not parsable, show a toast*/
+                    Toast.makeText(getBaseContext(), "Non-parsable expression", Toast.LENGTH_LONG).show();
                 }
                 break;
         }
+    }
+
+    public String trimInteger(String expression) {
+        /*Since we are using float, Strings will always end with .0
+        We'll trim out string if it can be shown as an integer*/
+        if (expression.endsWith(".0"))
+            return expression.substring(0,expression.length()-2);
+        return expression;
     }
 }
