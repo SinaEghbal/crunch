@@ -182,9 +182,9 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 answer = false;
                 break;
-            case R.id.btn_history:
-                //TODO -> implement a db for the history
-                break;
+//            case R.id.btn_history:
+//                TODO -> implement a db for the history
+//                break;
             case R.id.btn_result:
                 try {
                     /*We'll evaluate the string on our screen and calculate the result if it is
