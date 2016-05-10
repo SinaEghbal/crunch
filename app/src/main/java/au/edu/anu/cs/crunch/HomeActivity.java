@@ -6,15 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.*;
 
-import au.edu.anu.cs.crunch.parser.abstracts.Features;
 import au.edu.anu.cs.crunch.parser.arithmeticExps.Expression;
 import au.edu.anu.cs.crunch.persistent_history.CalculatorDB;
 import au.edu.anu.cs.crunch.persistent_history.DBHelper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -30,13 +27,17 @@ public class HomeActivity extends AppCompatActivity {
         screen = (TextView)findViewById(R.id.txtViewScreen);
         calculatorHelper = new DBHelper(this);
         history = (Spinner) findViewById(R.id.spinner_history);
+        tableName = CalculatorDB.Arithmetic.TABLE_NAME;
+        loadSpinner();
         //OnClick Listener for the spinner
         history.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String expression = history.getSelectedItem().toString();
-                screen.setText(expression);
-                answer = true;
+                if (position!=0) {
+                    String expression = history.getSelectedItem().toString();
+                    screen.setText(expression);
+                    answer = true;
+                }
             }
 
             @Override
@@ -45,12 +46,12 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         //For arithmetic expression. Should be changed for the logical expressions.
-        tableName = CalculatorDB.Arithmetic.TABLE_NAME;
-        loadSpinner();
         answer = false;
     }
 
     protected void loadSpinner() {
+        /*loads the history spinner.
+        * adds an empty item which will be the default selected item.*/
         Cursor previousExpressions = calculatorHelper.getExpressions(tableName);
         List<String> expressionList = new ArrayList<String>();
         expressionList.add("");
@@ -84,7 +85,9 @@ public class HomeActivity extends AppCompatActivity {
 //        return super.onOptionsItemSelected(item);
 //    }
 
-    public void buttonOnClick(View view) {
+    public void keypadOnClick(View view) {
+        /*Implementation for the keypad buttons.
+        * implements the functionality of the keypad keys based on the key id.*/
         answer = false;
         String no = "";
         switch (view.getId()) {
@@ -140,8 +143,10 @@ public class HomeActivity extends AppCompatActivity {
         screen.setText(screen.getText().toString()+no);
     }
 
-    public void buttonOperation(View view) {
+    public void operationOnClick(View view) {
+        /*Implementation for the operation buttons such as =, c, <-.*/
         switch (view.getId()) {
+            /*switches the button id and runs the functionality of the key accordingly*/
             case R.id.btn_clear:
                 screen.setText("");
                 break;
@@ -171,21 +176,30 @@ public class HomeActivity extends AppCompatActivity {
                 break;
             case R.id.btn_result:
                 try {
+                    /*We'll evaluate the string on our screen and calculate the result if it is
+                    * parsable*/
                     String expString = screen.getText().toString();
                     Expression exp = new Expression(expString);
                     exp.decompose();
                     if (!answer) {
                         calculatorHelper.insertExpression(expString, tableName);
-                        loadSpinner();
                     }
-//                    if (Features.isExpression(expString, Features.ARITHMETICOPERATORS))
-//                        calculatorHelper.insertExpression(expString, tableName);
-//                    loadSpinner();
-                    screen.setText(String.valueOf(exp.calculateValue()));
+                    loadSpinner();
+                    screen.setText(trimInteger(String.valueOf(exp.calculateValue())));
                     answer = true;
                 } catch (Exception e) {
-                    Toast.makeText(getBaseContext(), "Unparsable Expression", Toast.LENGTH_LONG).show();
+                    /*If the string is not parsable, show a toast*/
+                    Toast.makeText(getBaseContext(), "Non-parsable expression", Toast.LENGTH_LONG).show();
                 }
+                break;
         }
+    }
+
+    public String trimInteger(String expression) {
+        /*Since we are using float, Strings will always end with .0
+        We'll trim out string if it can be shown as an integer*/
+        if (expression.endsWith(".0"))
+            return expression.substring(0,expression.length()-2);
+        return expression;
     }
 }
