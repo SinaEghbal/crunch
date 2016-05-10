@@ -1,21 +1,50 @@
 package au.edu.anu.cs.crunch;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import android.widget.Toast;
+import au.edu.anu.cs.crunch.parser.abstracts.Features;
 import au.edu.anu.cs.crunch.parser.arithmeticExps.Expression;
+import au.edu.anu.cs.crunch.persistent_history.CalculatorDB;
+import au.edu.anu.cs.crunch.persistent_history.DBHelper;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class HomeActivity extends AppCompatActivity {
 
     TextView screen;
+    DBHelper calculatorHelper;
+    Spinner history;
+    String tableName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         screen = (TextView)findViewById(R.id.txtViewScreen);
+        calculatorHelper = new DBHelper(this);
+        history = (Spinner) findViewById(R.id.spinner_history);
+        tableName = CalculatorDB.Arithmetic.TABLE_NAME;
+        loadSpinner();
+    }
+
+    protected void loadSpinner() {
+        Cursor previousExpressions = calculatorHelper.getExpressions(tableName);
+        List<String> expressionList = new ArrayList<String>();
+        while (previousExpressions.moveToNext()) {
+            expressionList.add(previousExpressions.getString(1));
+        }
+        ArrayAdapter<String> historyAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, expressionList);
+        historyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        history.setAdapter(historyAdapter);
     }
 
 //    @Override
@@ -120,10 +149,17 @@ public class HomeActivity extends AppCompatActivity {
                 //TODO -> implement a db for the history
                 break;
             case R.id.btn_result:
-
-                Expression exp = new Expression(screen.getText().toString());
-                exp.decompose();
-                screen.setText(String.valueOf(exp.calculateValue()));
+                try {
+                    String expString = screen.getText().toString();
+                    Expression exp = new Expression(expString);
+                    exp.decompose();
+                    if (Features.isExpression(expString, Features.ARITHMETICOPERATORS))
+                        calculatorHelper.insertExpression(expString, tableName);
+                    loadSpinner();
+                    screen.setText(String.valueOf(exp.calculateValue()));
+                } catch (Exception e) {
+                    Toast.makeText(getBaseContext(), "Unparsable Expression", Toast.LENGTH_LONG).show();
+                }
         }
     }
 }
