@@ -1,7 +1,10 @@
 package au.edu.anu.cs.crunch;
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.*;
@@ -12,6 +15,7 @@ import au.edu.anu.cs.crunch.persistent_history.DBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by sina on 5/10/16.
@@ -20,6 +24,8 @@ import java.util.List;
  */
 
 public class HomeActivity extends AppCompatActivity {
+
+    public static final int RECOG = 1;
 
     TextView screen;
     DBHelper calculatorHelper;
@@ -204,6 +210,30 @@ public class HomeActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Non-parsable expression", Toast.LENGTH_LONG).show();
                 }
                 break;
+        }
+    }
+
+    public boolean voiceRecog(View view){
+        //User wants to use voice to text
+        // Approach taken from Lauren Darcey & Shane Conder
+        // http://www.developer.com/ws/android/development-tools/
+        // add-text-to-speech-and-speech-recognition-to-your-android-applications.html
+        Intent voiceIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        voiceIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        voiceIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        startActivityForResult(voiceIntent, RECOG);
+        return true;
+    }
+
+    //Listener for voice recognition intents
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == RECOG && resultCode == RESULT_OK){
+            ArrayList<String> text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            TextView txtViewScreen = (TextView) findViewById(R.id.txtViewScreen);
+            txtViewScreen.setText(text.get(0).toString());
+
         }
     }
 
