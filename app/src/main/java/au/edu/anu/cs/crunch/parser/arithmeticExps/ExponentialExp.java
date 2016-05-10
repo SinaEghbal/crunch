@@ -8,6 +8,8 @@ import au.edu.anu.cs.crunch.parser.abstracts.NonTerminal;
  * Created by sina on 4/28/16.
  */
 public class ExponentialExp extends BinaryNonTerminal<Float> {
+    /* Non terminal with second highest priority.
+    * For exponential expressions. */
     public ExponentialExp(String expression) {
         super(expression, Features.ARITHMETICOPERATORS);
         this.operators = new String[]{"^"};

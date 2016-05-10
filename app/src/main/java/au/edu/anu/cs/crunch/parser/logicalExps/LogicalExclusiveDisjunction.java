@@ -9,6 +9,7 @@ import au.edu.anu.cs.crunch.parser.abstracts.UnaryNonTerminal;
  * Created by sina on 4/29/16.
  */
 public class LogicalExclusiveDisjunction extends BinaryNonTerminal<Boolean> {
+    /* Implements logical XOR. i.e. true XOR false = true, true XOR true = false. */
     public LogicalExclusiveDisjunction(String expression) {
         super(expression, Features.LOGICALOPERATORS);
         this.operators = new String[] {"^"};

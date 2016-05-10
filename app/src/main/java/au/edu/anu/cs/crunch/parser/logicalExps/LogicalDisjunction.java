@@ -8,7 +8,7 @@ import au.edu.anu.cs.crunch.parser.abstracts.NonTerminal;
  * Created by sina on 4/29/16.
  */
 public class LogicalDisjunction extends BinaryNonTerminal<Boolean> {
-
+    /* Implement logical disjunction. i.e. true or false = true. */
 
     public LogicalDisjunction(String expression) {
         super(expression, Features.LOGICALOPERATORS);

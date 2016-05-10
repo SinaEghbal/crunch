@@ -8,7 +8,7 @@ import au.edu.anu.cs.crunch.parser.abstracts.UnaryNonTerminal;
 
 public class Trigonometric extends UnaryNonTerminal<Float> {
 //    Expression
-//    String function;
+    /*A unary non terminal for the trigonometric functions, Sin, Cos, etc.*/
     public Trigonometric(String expression) {
         super(expression);
     }
