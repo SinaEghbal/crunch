@@ -3,6 +3,7 @@ package au.edu.anu.cs.crunch;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -43,12 +44,38 @@ public class HomeActivity extends Activity {
         history = (Spinner) findViewById(R.id.spinner_history);
         tableName = CalculatorDB.Arithmetic.TABLE_NAME;
         loadSpinner();
+
+        // set backgrounds of non number buttons
+
+        Button b = (Button) findViewById(R.id.btn_left_parens);
+        b.getBackground().setColorFilter(0xFF7A7A7A, PorterDuff.Mode.MULTIPLY); //FF6A6A6A
+        b = (Button) findViewById(R.id.btn_right_parens);
+        b.getBackground().setColorFilter(0xFF7A7A7A, PorterDuff.Mode.MULTIPLY);
+        b = (Button) findViewById(R.id.btn_modulus);
+        b.getBackground().setColorFilter(0xFF7A7A7A, PorterDuff.Mode.MULTIPLY);
+        b = (Button) findViewById(R.id.btn_sign);
+        b.getBackground().setColorFilter(0xFF7A7A7A, PorterDuff.Mode.MULTIPLY);
+        b = (Button) findViewById(R.id.btn_division);
+        b.getBackground().setColorFilter(0xFF7A7A7A, PorterDuff.Mode.MULTIPLY);
+        b = (Button) findViewById(R.id.btn_times);
+        b.getBackground().setColorFilter(0xFF7A7A7A, PorterDuff.Mode.MULTIPLY);
+        b = (Button) findViewById(R.id.btn_minus);
+        b.getBackground().setColorFilter(0xFF7A7A7A, PorterDuff.Mode.MULTIPLY);
+        b = (Button) findViewById(R.id.btn_plus);
+        b.getBackground().setColorFilter(0xFF7A7A7A, PorterDuff.Mode.MULTIPLY);
+        b = (Button) findViewById(R.id.btn_result);
+        b.getBackground().setColorFilter(0xFF7A7A7A, PorterDuff.Mode.MULTIPLY);
+        b = (Button) findViewById(R.id.btn_clear);
+        b.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+        b = (Button) findViewById(R.id.btn_delete);
+        b.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+
         //OnClick Listener for the spinner
         history.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 /* When an item is selected in the spinner, print it on the screen. */
-                if (position!=0) {
+                if (position != 0) {
                     /* Not when you load the spinner though. */
                     String expression = history.getSelectedItem().toString();
                     screen.setText(expression);
@@ -152,7 +179,7 @@ public class HomeActivity extends Activity {
                 no = "+";
                 break;
             case R.id.btn_times:
-                no = "*";
+                no = "x";
                 break;
             case R.id.btn_division:
                 no = "/";
