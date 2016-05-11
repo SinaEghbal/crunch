@@ -156,6 +156,12 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.btn_division:
                 no = "/";
                 break;
+            case R.id.btn_left_parens:
+                no = "(";
+                break;
+            case R.id.btn_right_parens:
+                no = ")";
+                break;
         }
         screen.setText(screen.getText().toString()+no);
     }

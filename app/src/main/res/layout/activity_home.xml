@@ -5,10 +5,14 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:orientation="vertical" >
-
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.15"
         android:orientation="horizontal">
         <Spinner
             android:layout_width="0dp"
@@ -32,13 +36,17 @@
             android:src="@android:drawable/ic_btn_speak_now"
             android:onClick="voiceRecog"
             android:id="@+id/more_options"/>
-
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.15"
         android:orientation="horizontal"
         android:layout_gravity="fill">
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.50" />
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -54,6 +62,29 @@
             android:text="Del"
             android:onClick="operationOnClick"
             android:id="@+id/btn_delete"
+            style="?android:attr/borderlessButtonStyle"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.15"
+        android:orientation="horizontal"
+        android:layout_gravity="fill">
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:text="("
+            android:onClick="keypadOnClick"
+            android:id="@+id/btn_left_parens"
+            style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:text=")"
+            android:onClick="keypadOnClick"
+            android:id="@+id/btn_right_parens"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:layout_width="0dp"
@@ -74,7 +105,8 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.15"
         android:orientation="horizontal">
         <Button
             android:layout_width="0dp"
@@ -111,7 +143,8 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.15"
         android:orientation="horizontal">
         <Button
             android:layout_width="0dp"
@@ -148,7 +181,8 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.15"
         android:orientation="horizontal">
         <Button
             android:layout_width="0dp"
@@ -185,7 +219,8 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.17"
         android:orientation="horizontal">
         <Button
             android:layout_width="0dp"
@@ -220,10 +255,5 @@
             android:id="@+id/btn_plus"
             style="?android:attr/borderlessButtonStyle"/>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-    </LinearLayout>
 </LinearLayout>
