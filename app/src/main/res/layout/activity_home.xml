@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:orientation="vertical" >
+    android:orientation="vertical">
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -49,20 +49,18 @@
             android:layout_weight="0.50" />
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="C"
             android:onClick="operationOnClick"
-            android:id="@+id/btn_clear"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_clear"/>
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="Del"
             android:onClick="operationOnClick"
-            android:id="@+id/btn_delete"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_delete" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -72,36 +70,32 @@
         android:layout_gravity="fill">
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="("
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_left_parens"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_left_parens" />
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text=")"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_right_parens"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_right_parens" />
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="%"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_modulus"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_modulus" />
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="+/-"
             android:onClick="operationOnClick"
-            android:id="@+id/btn_sign"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_sign" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -110,36 +104,32 @@
         android:orientation="horizontal">
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="7"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_7"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_7" />
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="8"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_8"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_8" />
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="9"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_9"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_9" />
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="/"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_division"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_division" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -148,36 +138,32 @@
         android:orientation="horizontal">
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="4"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_4"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_4" />
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="5"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_5"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_5" />
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="6"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_6"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_6" />
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="x"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_times"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_times" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -186,36 +172,32 @@
         android:orientation="horizontal">
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="1"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_1"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_1" />
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="2"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_2"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_2" />
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="3"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_3"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_3" />
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="-"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_minus"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_minus" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -224,36 +206,32 @@
         android:orientation="horizontal">
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="."
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_point"
-            style="?android:attr/borderlessButtonStyle" />
+            android:id="@+id/btn_point" />
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="0"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_0"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_0" />
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="="
             android:onClick="operationOnClick"
-            android:id="@+id/btn_result"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_result" />
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:text="+"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_plus"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:id="@+id/btn_plus" />
     </LinearLayout>
 
 </LinearLayout>

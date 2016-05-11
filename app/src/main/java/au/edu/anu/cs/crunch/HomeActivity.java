@@ -1,5 +1,6 @@
 package au.edu.anu.cs.crunch;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -23,7 +24,7 @@ import java.util.Locale;
  * This code is published under GNU Public License 2.0
  */
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends Activity {
 
     public static final int RECOG = 1;
 
