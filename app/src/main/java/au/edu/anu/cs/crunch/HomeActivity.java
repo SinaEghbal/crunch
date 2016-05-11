@@ -230,9 +230,14 @@ public class HomeActivity extends AppCompatActivity {
 
         if (requestCode == RECOG && resultCode == RESULT_OK){
             ArrayList<String> text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            TextView txtViewScreen = (TextView) findViewById(R.id.txtViewScreen);
-            txtViewScreen.setText(text.get(0).toString());
-
+            // catch expression if not parsable
+            try{
+                Expression expression = new Expression(text.get(0).toString());
+                TextView txtViewScreen = (TextView) findViewById(R.id.txtViewScreen);
+                txtViewScreen.setText(text.get(0).toString());
+            }catch (Exception e){
+                Toast.makeText(getBaseContext(), "Non-parsable expression", Toast.LENGTH_LONG).show();
+            }
         }
     }
 

@@ -10,6 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:id="@+id/spinner_history"
+            android:spinnerMode="dialog"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -19,11 +25,11 @@
             android:hint="0.0"
             android:onClick="keypadOnClick"
             android:id="@+id/txtViewScreen"/>
-        <Button
+        <ImageButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="..."
+            android:layout_weight="0.2"
+            android:src="@android:drawable/ic_btn_speak_now"
             android:onClick="voiceRecog"
             android:id="@+id/more_options"/>
 
@@ -218,10 +224,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner_history"
-            android:spinnerMode="dialog"/>
+
     </LinearLayout>
 </LinearLayout>
