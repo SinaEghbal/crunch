@@ -25,9 +25,6 @@ public class ParserTest extends ApplicationTestCase<Application>{
         NonTerminal expressionOne = new Expression("10+5");
         NonTerminal expressionTwo = new Expression("0+10");
         NonTerminal expressionThree = new Expression("100000+100000");
-//        expressionOne.decompose();
-//        expressionTwo.decompose();
-//        expressionThree.decompose();
         Float valueOne = (Float) expressionOne.calculateValue();
         Float valueTwo = (Float) expressionTwo.calculateValue();
         Float valueThree = (Float) expressionThree.calculateValue();
@@ -41,9 +38,6 @@ public class ParserTest extends ApplicationTestCase<Application>{
         NonTerminal expressionOne = new Expression("10-5");
         NonTerminal expressionTwo = new Expression("0-10");
         NonTerminal expressionThree = new Expression("100000-100000");
-//        expressionOne.decompose();
-//        expressionTwo.decompose();
-//        expressionThree.decompose();
         Float valueOne = (Float) expressionOne.calculateValue();
         Float valueTwo = (Float) expressionTwo.calculateValue();
         Float valueThree = (Float) expressionThree.calculateValue();
@@ -58,10 +52,6 @@ public class ParserTest extends ApplicationTestCase<Application>{
         NonTerminal expressionTwo = new Expression("-10");
         NonTerminal expressionThree = new Expression("-100000");
         NonTerminal expressionFour = new Expression("-1 + 2");
-//        expressionOne.decompose();
-//        expressionTwo.decompose();
-//        expressionThree.decompose();
-//        expressionFour.decompose();
         Float valueOne = (Float) expressionOne.calculateValue();
         Float valueTwo = (Float) expressionTwo.calculateValue();
         Float valueThree = (Float) expressionThree.calculateValue();
@@ -72,20 +62,16 @@ public class ParserTest extends ApplicationTestCase<Application>{
         Assert.assertTrue("Expression should evaluate to 1 not " + valueFour.toString(), valueFour == 1.0);
     }
 
-    public void complicatedExpressionTest() {
+    public void testComplicatedExpressionTest() {
         NonTerminal test = new Expression("3 + 4 * 2 / (1 - 5)^2^3");
-//        test.decompose();
-        assertEquals(test.calculateValue(), "3.00195");
+        assertEquals(test.calculateValue(), 3.000122);
         test = new Expression("sin(0)/tan(12)^sqr(5)-rec(1)");
-//        test.decompose();
         assertEquals(test.calculateValue(),"NaN");
     }
-    public void logicalExpressionTest() {
+    public void testLogicalExpressionTest() {
         NonTerminal test = new LogicalExpression("false^true");
-//        test.decompose();
-        assertEquals(test.calculateValue(), "false");
+        assertEquals(test.calculateValue(), true);
         test = new LogicalExpression("false^true>false=(true|false)&false");
-//        test.decompose();
-        assertEquals(test.calculateValue(), "false");
+        assertEquals(test.calculateValue(), false);
     }
 }

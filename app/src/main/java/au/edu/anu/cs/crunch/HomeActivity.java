@@ -197,7 +197,6 @@ public class HomeActivity extends AppCompatActivity {
                     * parsable*/
                     String expString = screen.getText().toString();
                     Expression exp = new Expression(expString);
-//                    exp.decompose();
                     if (!answer) {
                         /* if it's not an answer write it to the db. */
                         calculatorHelper.insertExpression(expString, tableName);
