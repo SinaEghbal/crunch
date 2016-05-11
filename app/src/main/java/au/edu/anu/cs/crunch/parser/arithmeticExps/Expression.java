@@ -14,6 +14,7 @@ public class Expression extends BinaryNonTerminal {
     public Expression(String expression) {
         super(expression, Features.ARITHMETICOPERATORS);
         this.operators = new String[]{"+", "-"};
+        this.decompose();
     }
 
     @Override

@@ -13,6 +13,7 @@ public class LogicalExpression extends BinaryNonTerminal<Boolean> {
     public LogicalExpression(String expression) {
         super(expression, Features.LOGICALOPERATORS);
         this.operators = new String[] {"="};
+        this.decompose();
     }
 
     @Override
