@@ -43,6 +43,12 @@ public class HomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         savedInstance = savedInstanceState;
+
+        int viewTmp = getIntent().getIntExtra("VIEW", 0);
+        if (viewTmp != 0){
+            viewID=viewTmp;
+        }
+
         // reload image on orientation change
         if (savedInstanceState != null) {
             viewID = savedInstanceState.getInt("VIEW");

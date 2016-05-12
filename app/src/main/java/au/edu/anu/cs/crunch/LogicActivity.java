@@ -44,6 +44,7 @@ public class LogicActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         savedInstance = savedInstanceState;
+
         // reload image on orientation change
         if (savedInstanceState != null) {
             viewID = savedInstanceState.getInt("VIEW");
@@ -66,7 +67,8 @@ public class LogicActivity extends Activity{
         Button[] colouredButtons = {(Button) findViewById(R.id.btn_conjunct),
                 (Button) findViewById(R.id.btn_disjunct), (Button) findViewById(R.id.btn_negation),
                 (Button) findViewById(R.id.btn_implies), (Button) findViewById(R.id.btn_xor),
-                (Button) findViewById(R.id.btn_result), (Button) findViewById(R.id.btn_clear),
+                (Button) findViewById(R.id.btn_result), (Button) findViewById(R.id.btn_left_parens),
+                (Button) findViewById(R.id.btn_right_parens), (Button) findViewById(R.id.btn_clear),
                 (Button) findViewById(R.id.btn_delete)};
 
         for (Button b :colouredButtons) {
@@ -150,8 +152,8 @@ public class LogicActivity extends Activity{
             String expStr="";
             try{
                 expStr = text.get(0).toString();
-                expStr = expStr.replaceAll("and", "&");
-                expStr = expStr.replaceAll("or", "|");
+                expStr = expStr.replaceAll("and", "∧");
+                expStr = expStr.replaceAll("or", "∨");
                 NonTerminal exp = new LogicalExpression(expStr);
                 TextView txtViewScreen = (TextView) findViewById(R.id.txtViewScreen);
                 txtViewScreen.setText(expStr);
@@ -183,7 +185,7 @@ public class LogicActivity extends Activity{
                     /*We'll evaluate the string on our expTextView and calculate the result if it is
                     * parsable*/
                     String expString = expTextView.getText().toString();
-                    NonTerminal exp = new LogicalExpression(expString);
+                    NonTerminal exp = new LogicalExpression(unicodeConverter(expString));
                     if (!answer) {
                         /* if it's not an answer write it to the db. */
                         calculatorHelper.insertExpression(expString, tableName);
@@ -197,5 +199,78 @@ public class LogicActivity extends Activity{
                 }
                 break;
         }
+    }
+
+    public void keypadOnClick(View view) {
+        /*Implementation for the keypad buttons.
+        * implements the functionality of the keypad keys based on the key id.*/
+        answer = false;
+        String no = "";
+        switch (view.getId()) {
+            case R.id.btn_true:
+                no = "true";
+                break;
+            case R.id.btn_false:
+                no = "false";
+                break;
+            case R.id.btn_conjunct:
+                no = "\u2227";
+                break;
+            case R.id.btn_disjunct:
+                no = "\u2228";
+                break;
+            case R.id.btn_negation:
+                no = "\u00AC";
+                break;
+            case R.id.btn_implies:
+                no = "\u2192";
+                break;
+            case R.id.btn_xor:
+                no = "\u2295";
+                break;
+            case R.id.btn_left_parens:
+                no = "(";
+                break;
+            case R.id.btn_right_parens:
+                no = ")";
+                break;
+        }
+        expTextView.setText(expTextView.getText().toString()+no);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.trig:
+                // User wants to switch to trigonometric panel
+                Intent intentTrig = new Intent(getApplicationContext(), HomeActivity.class);
+                int viewIDTrig = R.layout.activity_trigonometric;
+                intentTrig.putExtra("VIEW", viewIDTrig);
+                startActivity(intentTrig);
+                return true;
+
+            case R.id.basic:
+                // User wants to switch to basic panel
+                Intent intentHome = new Intent(getApplicationContext(), HomeActivity.class);
+                int viewIDHome = R.layout.activity_home;
+                intentHome.putExtra("VIEW", viewIDHome);
+                startActivity(intentHome);
+                return true;
+
+            case R.id.logic:
+                // User wants to switch to logic panel
+                return true;
+            default:
+                //error unknown action
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public String unicodeConverter(String str){
+        str = str.replaceAll("∧", "&");
+        str = str.replaceAll("∨", "|");
+        str = str.replaceAll("→", ">");
+        str = str.replaceAll("⊕", "^");
+        return str;
     }
 }
