@@ -37,12 +37,7 @@ public class LogicalFactor extends UnaryNonTerminal {
             if (expression.equals("true") || expression.equals("false"))
                 value = Boolean.valueOf(expression);
             else {
-                Exception e = new Exception("unparsable expression");
-                try {
-                    throw e;
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-                }
+                value = 1/0;
             }
         }
     }
