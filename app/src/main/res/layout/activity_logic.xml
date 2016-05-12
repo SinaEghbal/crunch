@@ -43,10 +43,20 @@
         android:layout_weight="0.15"
         android:orientation="horizontal"
         android:layout_gravity="fill">
-        <Space
+        <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.50" />
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            android:text="("
+            android:onClick="keypadOnClick"
+            android:id="@+id/btn_left_parens" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            android:text=")"
+            android:onClick="keypadOnClick"
+            android:id="@+id/btn_right_parens" />
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
