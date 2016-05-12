@@ -31,6 +31,7 @@ import au.edu.anu.cs.crunch.persistent_history.DBHelper;
 public class LogicActivity extends Activity{
 
     public static final int RECOG = 1;
+    private static final int ACTIVITY = 0;
 
     TextView expTextView;
     DBHelper calculatorHelper;
@@ -100,6 +101,7 @@ public class LogicActivity extends Activity{
         });
         //For logic expression. Should be changed for the logical expressions.
         answer = false;
+
     }
 
     protected void loadSpinner() {
@@ -163,6 +165,8 @@ public class LogicActivity extends Activity{
             }catch (Exception e){
                 Toast.makeText(getBaseContext(), expStr + " Not parsable", Toast.LENGTH_LONG).show();
             }
+        } else if (requestCode == ACTIVITY) {
+            this.finish();
         }
     }
 
@@ -249,7 +253,7 @@ public class LogicActivity extends Activity{
                 Intent intentTrig = new Intent(getApplicationContext(), HomeActivity.class);
                 int viewIDTrig = R.layout.activity_trigonometric;
                 intentTrig.putExtra("VIEW", viewIDTrig);
-                startActivity(intentTrig);
+                startActivityForResult(intentTrig, ACTIVITY);
                 return true;
 
             case R.id.basic:
@@ -257,7 +261,7 @@ public class LogicActivity extends Activity{
                 Intent intentHome = new Intent(getApplicationContext(), HomeActivity.class);
                 int viewIDHome = R.layout.activity_home;
                 intentHome.putExtra("VIEW", viewIDHome);
-                startActivity(intentHome);
+                startActivityForResult(intentHome, ACTIVITY);
                 return true;
 
             case R.id.logic:
