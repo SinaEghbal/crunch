@@ -154,7 +154,10 @@ public class LogicActivity extends Activity{
                 expStr = text.get(0).toString();
                 expStr = expStr.replaceAll("and", "∧");
                 expStr = expStr.replaceAll("or", "∨");
-                NonTerminal exp = new LogicalExpression(expStr);
+                expStr = expStr.replaceAll("implies", "→");
+                expStr = expStr.replaceAll("not ", "¬");
+                expStr = boolConverter(expStr);
+                NonTerminal exp = new LogicalExpression(unicodeConverter(expStr));
                 TextView txtViewScreen = (TextView) findViewById(R.id.txtViewScreen);
                 txtViewScreen.setText(expStr);
             }catch (Exception e){
@@ -191,7 +194,7 @@ public class LogicActivity extends Activity{
                         calculatorHelper.insertExpression(expString, tableName);
                     }
                     loadSpinner();
-                    expTextView.setText(String.valueOf(exp.calculateValue()));
+                    expTextView.setText(boolConverter(String.valueOf(exp.calculateValue())));
                     answer = true;
                 } catch (Exception e) {
                     /*If the string is not parsable, show a toast*/
@@ -208,10 +211,10 @@ public class LogicActivity extends Activity{
         String no = "";
         switch (view.getId()) {
             case R.id.btn_true:
-                no = "true";
+                no = "T";
                 break;
             case R.id.btn_false:
-                no = "false";
+                no = "F";
                 break;
             case R.id.btn_conjunct:
                 no = "\u2227";
@@ -272,6 +275,14 @@ public class LogicActivity extends Activity{
         str = str.replaceAll("→", ">");
         str = str.replaceAll("⊕", "^");
         str = str.replaceAll("¬", "~");
+        str = str.replaceAll("T", "true");
+        str = str.replaceAll("F", "false");
+        return str;
+    }
+
+    public String boolConverter(String str){
+        str = str.replaceAll("true", "T");
+        str = str.replaceAll("false", "F");
         return str;
     }
 }
