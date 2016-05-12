@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 
@@ -34,11 +36,24 @@ public class HomeActivity extends Activity {
     Spinner history;
     String tableName;
     boolean answer;
+    Bundle savedInstance;
+    int viewID = R.layout.activity_home;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        savedInstance = savedInstanceState;
+        // reload image on orientation change
+        if (savedInstanceState != null) {
+            viewID = savedInstanceState.getInt("VIEW");
+            setContentView(viewID);
+            TextView textBox = (TextView) findViewById(R.id.txtViewScreen);
+            textBox.setText((String) savedInstanceState.get("TEXT"));
+            viewID = savedInstanceState.getInt("VIEW");
+        } else {
+            setContentView(viewID);
+        }
         screen = (TextView)findViewById(R.id.txtViewScreen);
         calculatorHelper = new DBHelper(this);
         history = (Spinner) findViewById(R.id.spinner_history);
@@ -108,12 +123,41 @@ public class HomeActivity extends Activity {
         history.setAdapter(historyAdapter);
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_home, menu);
-//        return true;
-//    }
+    //Create the top menu, where you can switch panels
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.trig:
+                // User wants to switch to trigonometric panel
+                viewID = R.layout.activity_trigonometric;
+                if(savedInstance != null){
+                    savedInstance.putInt("VIEW", viewID);
+                }
+                onCreate(savedInstance);
+                return true;
+
+            default:
+                //error unknown action
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    //Saves state so that it can be reconstructed on screen orientation change
+    @Override
+    public void onSaveInstanceState(Bundle state) {
+        TextView textBox = (TextView) findViewById(R.id.txtViewScreen);
+        state.putString("TEXT", textBox.getText().toString());
+        state.putInt("VIEW", viewID);
+    }
+
 //
 //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item) {
@@ -222,9 +266,6 @@ public class HomeActivity extends Activity {
                 }
                 answer = false;
                 break;
-//            case R.id.btn_history:
-//                TODO -> implement a db for the history
-//                break;
             case R.id.btn_result:
                 try {
                     /*We'll evaluate the string on our screen and calculate the result if it is
