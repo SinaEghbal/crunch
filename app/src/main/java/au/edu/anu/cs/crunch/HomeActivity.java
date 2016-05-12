@@ -28,6 +28,7 @@ import java.util.Locale;
 public class HomeActivity extends Activity {
 
     public static final int RECOG = 1;
+    private static final int ACTIVITY = 0;
 
     TextView expTextView;
     DBHelper calculatorHelper;
@@ -111,6 +112,7 @@ public class HomeActivity extends Activity {
         });
         //For arithmetic expression. Should be changed for the logical expressions.
         answer = false;
+
     }
 
     protected void loadSpinner() {
@@ -162,7 +164,7 @@ public class HomeActivity extends Activity {
             case R.id.logic:
                 // User wants to switch to logic panel
                 Intent intent = new Intent(getApplicationContext(), LogicActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, ACTIVITY);
                 return true;
             default:
                 //error unknown action
@@ -372,6 +374,8 @@ public class HomeActivity extends Activity {
             }catch (Exception e){
                 Toast.makeText(getBaseContext(),expStr + " Not parsable", Toast.LENGTH_LONG).show();
             }
+        } else if(requestCode == ACTIVITY) {
+            this.finish();
         }
     }
 
