@@ -72,6 +72,6 @@ public class ParserTest extends ApplicationTestCase<Application>{
         NonTerminal test = new LogicalExpression("false^true");
         assertEquals(test.calculateValue(), true);
         test = new LogicalExpression("false^true>false=(true|false)&false");
-        assertEquals(test.calculateValue(), false);
+        assertEquals(test.calculateValue(), true);
     }
 }
