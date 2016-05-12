@@ -1,5 +1,7 @@
 package au.edu.anu.cs.crunch.parser.arithmeticExps;
 
+import android.util.Log;
+
 import au.edu.anu.cs.crunch.parser.abstracts.BinaryNonTerminal;
 import au.edu.anu.cs.crunch.parser.abstracts.Features;
 import au.edu.anu.cs.crunch.parser.abstracts.NonTerminal;
@@ -37,8 +39,10 @@ public class Term extends BinaryNonTerminal<Float> {
             return (Float)this.left.calculateValue() * (Float)this.right.calculateValue();
         else if (operator.equals("/"))
             return (Float)this.left.calculateValue() / (Float)this.right.calculateValue();
-        else if (operator.equals("&"))
+        else if (operator.equals("%")){
             return (Float) this.left.calculateValue() % (Float)this.right.calculateValue();
+        }
+
 //        switch (operator) {
 //            case "*":
 //                return (Float)this.left.calculateValue() * (Float)this.right.calculateValue();
@@ -47,6 +51,6 @@ public class Term extends BinaryNonTerminal<Float> {
 //            case "%":
 //                return (Float) this.left.calculateValue() % (Float)this.right.calculateValue();
 //        }
-        return (float)0;
+        return (float)-1;
     }
 }

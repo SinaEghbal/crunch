@@ -56,7 +56,7 @@ public class HomeActivity extends Activity {
         } else {
             setContentView(viewID);
         }
-        
+
         if(degrees)
             ((Button)findViewById(R.id.btn_rad_or_deg)).setText("deg");
 
@@ -351,12 +351,16 @@ public class HomeActivity extends Activity {
         if (requestCode == RECOG && resultCode == RESULT_OK){
             ArrayList<String> text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             // catch expression if not parsable
+            String expStr="";
             try{
-                Expression expression = new Expression(text.get(0).toString());
+                expStr = text.get(0).toString();
+                expStr = expStr.replaceAll("divided by", "/");
+                expStr = expStr.replaceAll("mod[a-z]*", "%");
+                Expression expression = new Expression(expStr);
                 TextView txtViewScreen = (TextView) findViewById(R.id.txtViewScreen);
-                txtViewScreen.setText(text.get(0).toString());
+                txtViewScreen.setText(expStr);
             }catch (Exception e){
-                Toast.makeText(getBaseContext(), "Non-parsable expression", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(),expStr + " Not parsable", Toast.LENGTH_LONG).show();
             }
         }
     }
