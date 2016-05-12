@@ -72,7 +72,7 @@ public class HomeActivity extends Activity {
         expTextView = (TextView)findViewById(R.id.txtViewScreen);
         calculatorHelper = new DBHelper(this);
         history = (Spinner) findViewById(R.id.spinner_history);
-        tableName = CalculatorDB.Arithmetic.TABLE_NAME;
+        tableName = CalculatorDB.Logic.TABLE_NAME;
         loadSpinner();
 
         // set backgrounds of non number buttons

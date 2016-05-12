@@ -24,10 +24,11 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String TEXT_TYPE = " TEXT";
     public static final String INT_TYPE = "INTEGER";
 
-    public static final String CREATE_TABLE = "CREATE TABLE " + CalculatorDB.Arithmetic.TABLE_NAME +
+    public static final String CREATE_TABLE_ARITHMETIC = "CREATE TABLE " + CalculatorDB.Arithmetic.TABLE_NAME +
             "(" + CalculatorDB.EXP_ID + " " + INT_TYPE +
-            ", " + CalculatorDB.EXPRESSION + TEXT_TYPE + ");" +
-            " CREATE TABLE "+ CalculatorDB.Logic.TABLE_NAME + "(" + CalculatorDB.EXP_ID + " " + INT_TYPE +
+            ", " + CalculatorDB.EXPRESSION + TEXT_TYPE + ");";
+
+    public static final String CREATE_TABLE_LOGIC = " CREATE TABLE "+ CalculatorDB.Logic.TABLE_NAME + "(" + CalculatorDB.EXP_ID + " " + INT_TYPE +
             ", " + CalculatorDB.EXPRESSION + TEXT_TYPE + ");";
 
     public static final String DROP_ENTRIES =
@@ -41,7 +42,8 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     /* Creates the table in the db */
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE);
+        db.execSQL(CREATE_TABLE_ARITHMETIC);
+        db.execSQL(CREATE_TABLE_LOGIC);
     }
 
     @Override
