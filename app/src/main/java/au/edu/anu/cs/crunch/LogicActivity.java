@@ -271,6 +271,7 @@ public class LogicActivity extends Activity{
         str = str.replaceAll("∨", "|");
         str = str.replaceAll("→", ">");
         str = str.replaceAll("⊕", "^");
+        str = str.replaceAll("¬", "~");
         return str;
     }
 }

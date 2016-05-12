@@ -48,6 +48,7 @@ public class HomeActivity extends Activity {
         if (viewTmp != 0){
             viewID=viewTmp;
         }
+        getIntent().putExtra("VIEW", 0);
 
         // reload image on orientation change
         if (savedInstanceState != null) {
