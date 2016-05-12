@@ -33,7 +33,17 @@ public class LogicalFactor extends UnaryNonTerminal {
             super.decompose();
         }
         else {
-            value = Boolean.valueOf(expression);
+//            value = Boolean.valueOf(expression);
+            if (expression.equals("true") || expression.equals("false"))
+                value = Boolean.valueOf(expression);
+            else {
+                Exception e = new Exception("unparsable expression");
+                try {
+                    throw e;
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+            }
         }
     }
 
