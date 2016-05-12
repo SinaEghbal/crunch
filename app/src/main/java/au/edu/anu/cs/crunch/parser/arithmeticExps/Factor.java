@@ -10,6 +10,8 @@ public class Factor extends UnaryNonTerminal<Float> {
     * Factor can be in form of
     * (exp), Number, -exp */
     float scalar = 1;
+    boolean degree;
+
     public Factor(String expression) {
         super(expression);
         decompose();
@@ -22,12 +24,20 @@ public class Factor extends UnaryNonTerminal<Float> {
         decompose();
     }
 
+    public Factor(String expression, boolean neg, boolean degree) {
+        super(expression);
+        if (neg)
+            scalar = -1;
+        decompose();
+        this.degree = degree;
+    }
+
     @Override
     public void decompose() {
         /* Decomposes the factor, if decomposable.*/
         if (expression.startsWith("(")) {
             String new_expression = expression.substring(1, expression.length()-1);
-            operand = new Expression(new_expression);
+            operand = new Expression(new_expression, degree);
             super.decompose();
         }
         else if (expression.startsWith("-")){
@@ -38,7 +48,7 @@ public class Factor extends UnaryNonTerminal<Float> {
                 expression.startsWith("rec(") || expression.startsWith("ln(")
                 || expression.startsWith("log(") || expression.startsWith("exp(")
                 || expression.startsWith("fac(")){
-            operand = new Trigonometric(expression);
+            operand = new Trigonometric(expression, degree);
             super.decompose();
         }
         else {

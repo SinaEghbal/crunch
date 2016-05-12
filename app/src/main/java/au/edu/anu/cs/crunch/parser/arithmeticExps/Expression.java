@@ -11,22 +11,30 @@ public class Expression extends BinaryNonTerminal {
     /* This is the class we instantiate to evaluate the arithmetic expressions.
     * It starts with decomposing the expressions by the lowest priorority operators
     * (Here -,+)*/
+    boolean degree;
     public Expression(String expression) {
         super(expression, Features.ARITHMETICOPERATORS);
         this.operators = new String[]{"+", "-"};
         this.decompose();
     }
 
+    public Expression(String expression, boolean degree) {
+        super(expression, Features.ARITHMETICOPERATORS);
+        this.operators = new String[] {"+", "-"};
+        this.decompose();
+        this.degree = degree;
+    }
+
     @Override
     public NonTerminal createNonTerminalLeft(String expression) {
-        Term term = new Term(expression);
+        Term term = new Term(expression, degree);
         term.decompose();
         return term;
     }
 
     @Override
     public NonTerminal createNonTerminalRight(String expression) {
-        Expression exp = new Expression(expression);
+        Expression exp = new Expression(expression, degree);
         exp.decompose();
         return exp;
     }

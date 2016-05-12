@@ -1,7 +1,5 @@
 package au.edu.anu.cs.crunch.parser.arithmeticExps;
 
-import android.util.Log;
-
 import au.edu.anu.cs.crunch.parser.abstracts.BinaryNonTerminal;
 import au.edu.anu.cs.crunch.parser.abstracts.Features;
 import au.edu.anu.cs.crunch.parser.abstracts.NonTerminal;
@@ -11,22 +9,29 @@ import au.edu.anu.cs.crunch.parser.abstracts.NonTerminal;
  */
 public class Term extends BinaryNonTerminal<Float> {
     /* Term has the second lowest priority in our grammar, it implements x, /, and %(modulus)
-    * operators*/
+    * operators */
+    boolean degree;
     public Term(String expression) {
         super(expression, Features.ARITHMETICOPERATORS);
         this.operators = new String[]{"x", "/", "%"};
     }
 
+    public Term(String expression, boolean degree) {
+        super(expression, Features.ARITHMETICOPERATORS);
+        this.operators = new String[]{"x", "/", "%"};
+        this.degree = degree;
+    }
+
     @Override
     public NonTerminal createNonTerminalLeft(String expression) {
-        ExponentialExp exp = new ExponentialExp(expression);
+        ExponentialExp exp = new ExponentialExp(expression, degree);
         exp.decompose();
         return exp;
     }
 
     @Override
     public NonTerminal createNonTerminalRight(String expression) {
-        Term term = new Term(expression);
+        Term term = new Term(expression, degree);
         term.decompose();
         return term;
     }

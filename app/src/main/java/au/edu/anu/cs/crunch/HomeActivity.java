@@ -166,6 +166,7 @@ public class HomeActivity extends Activity {
                 // User wants to switch to logic panel
                 Intent intent = new Intent(getApplicationContext(), LogicActivity.class);
                 startActivityForResult(intent, ACTIVITY);
+                finish();
                 return true;
             default:
                 //error unknown action
@@ -332,7 +333,7 @@ public class HomeActivity extends Activity {
                     /*We'll evaluate the string on our expTextView and calculate the result if it is
                     * parsable*/
                     String expString = expTextView.getText().toString();
-                    Expression exp = new Expression(expString);
+                    Expression exp = new Expression(expString, degrees);
                     if (!answer) {
                         /* if it's not an answer write it to the db. */
                         calculatorHelper.insertExpression(expString, tableName);

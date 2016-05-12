@@ -9,8 +9,10 @@ import au.edu.anu.cs.crunch.parser.abstracts.UnaryNonTerminal;
 public class Trigonometric extends UnaryNonTerminal<Float> {
 //    Expression
     /*A unary non terminal for the trigonometric functions, Sin, Cos, etc.*/
-    public Trigonometric(String expression) {
+    boolean degree;
+    public Trigonometric(String expression, boolean degree) {
         super(expression);
+        this.degree = degree;
     }
 
     @Override
@@ -21,12 +23,17 @@ public class Trigonometric extends UnaryNonTerminal<Float> {
 
     @Override
     public Float calculateValue() {
+        float val;
+        if (degree)
+            val = (float) Math.toDegrees((Float)operand.calculateValue());
+        else
+            val = (Float)operand.calculateValue();
         if (expression.startsWith("cos")) {
-            return Float.valueOf((float) Math.cos((Float)operand.calculateValue()));
+            return Float.valueOf((float) Math.cos(val));
         } else if (expression.startsWith("sin")) {
-            return Float.valueOf((float) Math.sin((Float)operand.calculateValue()));
+            return Float.valueOf((float) Math.sin(val));
         } else if (expression.startsWith("tan")) {
-            return Float.valueOf((float) Math.tan((Float)operand.calculateValue()));
+            return Float.valueOf((float) Math.tan(val));
         } else if (expression.startsWith("sqr")) {
             return Float.valueOf((float) Math.sqrt((Float)operand.calculateValue()));
         } else if (expression.startsWith("rec")) {

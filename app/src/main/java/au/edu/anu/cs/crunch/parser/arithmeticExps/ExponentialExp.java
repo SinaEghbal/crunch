@@ -10,21 +10,29 @@ import au.edu.anu.cs.crunch.parser.abstracts.NonTerminal;
 public class ExponentialExp extends BinaryNonTerminal<Float> {
     /* Non terminal with second highest priority.
     * For exponential expressions. */
+    boolean degree;
+
     public ExponentialExp(String expression) {
         super(expression, Features.ARITHMETICOPERATORS);
         this.operators = new String[]{"^"};
     }
 
+    public ExponentialExp(String expression, boolean degree) {
+        super(expression, Features.ARITHMETICOPERATORS);
+        this.operators = new String[]{"^"};
+        this.degree = degree;
+    }
+
     @Override
     public NonTerminal createNonTerminalLeft(String expression) {
-        Factor factor = new Factor(expression);
+        Factor factor = new Factor(expression, degree);
         factor.decompose();
         return factor;
     }
 
     @Override
     public NonTerminal createNonTerminalRight(String expression) {
-        ExponentialExp exp = new ExponentialExp(expression);
+        ExponentialExp exp = new ExponentialExp(expression, degree);
         exp.decompose();
         return exp;
     }
