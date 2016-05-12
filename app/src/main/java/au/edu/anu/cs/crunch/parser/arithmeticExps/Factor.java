@@ -35,7 +35,9 @@ public class Factor extends UnaryNonTerminal<Float> {
             super.decompose();
         } else if (expression.startsWith("sin(") || expression.startsWith("cos(") ||
                 expression.startsWith("tan(") || expression.startsWith("sqr(") ||
-                expression.startsWith("rec(")) {
+                expression.startsWith("rec(") || expression.startsWith("ln(")
+                || expression.startsWith("log(") || expression.startsWith("exp(")
+                || expression.startsWith("fac(")){
             operand = new Trigonometric(expression);
             super.decompose();
         }

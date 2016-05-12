@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
-import android.net.Uri;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +29,7 @@ public class HomeActivity extends Activity {
 
     public static final int RECOG = 1;
 
-    TextView screen;
+    TextView expTextView;
     DBHelper calculatorHelper;
     Spinner history;
     String tableName;
@@ -59,8 +57,12 @@ public class HomeActivity extends Activity {
 
         if(degrees)
             ((Button)findViewById(R.id.btn_rad_or_deg)).setText("deg");
+        if(expTextView != null) {
+            TextView textBox = (TextView) findViewById(R.id.txtViewScreen);
+            textBox.setText(expTextView.getText());
+        }
 
-        screen = (TextView)findViewById(R.id.txtViewScreen);
+        expTextView = (TextView)findViewById(R.id.txtViewScreen);
         calculatorHelper = new DBHelper(this);
         history = (Spinner) findViewById(R.id.spinner_history);
         tableName = CalculatorDB.Arithmetic.TABLE_NAME;
@@ -90,7 +92,7 @@ public class HomeActivity extends Activity {
                 if (position != 0) {
                     /* Not when you load the spinner though. */
                     String expression = history.getSelectedItem().toString();
-                    screen.setText(expression);
+                    expTextView.setText(expression);
                     answer = true;
                 }
             }
@@ -150,10 +152,15 @@ public class HomeActivity extends Activity {
                 }
                 onCreate(savedInstance);
                 return true;
+
+            case R.id.logic:
+                // User wants to switch to logic panel
+                Intent intent = new Intent(getApplicationContext(), LogicActivity.class);
+                startActivity(intent);
+                return true;
             default:
                 //error unknown action
                 return super.onOptionsItemSelected(item);
-
         }
     }
 
@@ -280,7 +287,7 @@ public class HomeActivity extends Activity {
                 }
                 break;
         }
-        screen.setText(screen.getText().toString()+no);
+        expTextView.setText(expTextView.getText().toString()+no);
     }
 
     public void operationOnClick(View view) {
@@ -288,41 +295,41 @@ public class HomeActivity extends Activity {
         switch (view.getId()) {
             /*switches the button id and runs the functionality of the key accordingly*/
             case R.id.btn_clear:
-                screen.setText("");
+                expTextView.setText("");
                 break;
             case R.id.btn_delete:
-                if (screen.getText().length() > 0) {
+                if (expTextView.getText().length() > 0) {
                     if (!answer)
-                        screen.setText(screen.getText().toString().substring(0,
-                            screen.getText().toString().length()-1));
+                        expTextView.setText(expTextView.getText().toString().substring(0,
+                            expTextView.getText().toString().length()-1));
                     else
-                        screen.setText("");
+                        expTextView.setText("");
                     answer = false;
                 }
                 break;
             case R.id.btn_sign:
-                if (screen.getText().toString().length() > 0) {
-                    if (screen.getText().toString().charAt(0) == '-') {
-                        screen.setText(screen.getText().toString().substring(1));
+                if (expTextView.getText().toString().length() > 0) {
+                    if (expTextView.getText().toString().charAt(0) == '-') {
+                        expTextView.setText(expTextView.getText().toString().substring(1));
                     } else
-                        screen.setText("-" + screen.getText().toString());
+                        expTextView.setText("-" + expTextView.getText().toString());
                 } else {
-                    screen.setText("-");
+                    expTextView.setText("-");
                 }
                 answer = false;
                 break;
             case R.id.btn_result:
                 try {
-                    /*We'll evaluate the string on our screen and calculate the result if it is
+                    /*We'll evaluate the string on our expTextView and calculate the result if it is
                     * parsable*/
-                    String expString = screen.getText().toString();
+                    String expString = expTextView.getText().toString();
                     Expression exp = new Expression(expString);
                     if (!answer) {
                         /* if it's not an answer write it to the db. */
                         calculatorHelper.insertExpression(expString, tableName);
                     }
                     loadSpinner();
-                    screen.setText(trimInteger(String.valueOf(exp.calculateValue())));
+                    expTextView.setText(trimInteger(String.valueOf(exp.calculateValue())));
                     answer = true;
                 } catch (Exception e) {
                     /*If the string is not parsable, show a toast*/
@@ -334,9 +341,6 @@ public class HomeActivity extends Activity {
 
     public boolean voiceRecog(View view){
         //User wants to use voice to text
-        // Approach taken from Lauren Darcey & Shane Conder
-        // http://www.developer.com/ws/android/development-tools/
-        // add-text-to-speech-and-speech-recognition-to-your-android-applications.html
         Intent voiceIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         voiceIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         voiceIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());

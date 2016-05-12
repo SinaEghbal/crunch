@@ -12,4 +12,9 @@
         android:icon="@android:drawable/ic_menu_add"
         android:title="Basic panel"
         app:showAsAction="always"/>
+    <item
+        android:id="@+id/logic"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Logic panel"
+        app:showAsAction="always"/>
 </menu>
