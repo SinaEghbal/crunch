@@ -37,6 +37,7 @@ public class HomeActivity extends Activity {
     String tableName;
     boolean answer;
     Bundle savedInstance;
+    boolean degrees = false;
     int viewID = R.layout.activity_home;
 
 
@@ -51,9 +52,14 @@ public class HomeActivity extends Activity {
             TextView textBox = (TextView) findViewById(R.id.txtViewScreen);
             textBox.setText((String) savedInstanceState.get("TEXT"));
             viewID = savedInstanceState.getInt("VIEW");
+            degrees = savedInstanceState.getBoolean("DEGREES");
         } else {
             setContentView(viewID);
         }
+        
+        if(degrees)
+            ((Button)findViewById(R.id.btn_rad_or_deg)).setText("deg");
+
         screen = (TextView)findViewById(R.id.txtViewScreen);
         calculatorHelper = new DBHelper(this);
         history = (Spinner) findViewById(R.id.spinner_history);
@@ -61,29 +67,20 @@ public class HomeActivity extends Activity {
         loadSpinner();
 
         // set backgrounds of non number buttons
+        Button[] colouredButtons = {(Button) findViewById(R.id.btn_left_parens),
+                (Button) findViewById(R.id.btn_right_parens), (Button) findViewById(R.id.btn_modulus),
+                (Button) findViewById(R.id.btn_sign), (Button) findViewById(R.id.btn_division),
+                (Button) findViewById(R.id.btn_times), (Button) findViewById(R.id.btn_minus),
+                (Button) findViewById(R.id.btn_plus), (Button) findViewById(R.id.btn_result),
+                (Button) findViewById(R.id.btn_clear), (Button) findViewById(R.id.btn_delete)};
 
-        Button b = (Button) findViewById(R.id.btn_left_parens);
-        b.getBackground().setColorFilter(0xFF7A7A7A, PorterDuff.Mode.MULTIPLY); //FF6A6A6A
-        b = (Button) findViewById(R.id.btn_right_parens);
-        b.getBackground().setColorFilter(0xFF7A7A7A, PorterDuff.Mode.MULTIPLY);
-        b = (Button) findViewById(R.id.btn_modulus);
-        b.getBackground().setColorFilter(0xFF7A7A7A, PorterDuff.Mode.MULTIPLY);
-        b = (Button) findViewById(R.id.btn_sign);
-        b.getBackground().setColorFilter(0xFF7A7A7A, PorterDuff.Mode.MULTIPLY);
-        b = (Button) findViewById(R.id.btn_division);
-        b.getBackground().setColorFilter(0xFF7A7A7A, PorterDuff.Mode.MULTIPLY);
-        b = (Button) findViewById(R.id.btn_times);
-        b.getBackground().setColorFilter(0xFF7A7A7A, PorterDuff.Mode.MULTIPLY);
-        b = (Button) findViewById(R.id.btn_minus);
-        b.getBackground().setColorFilter(0xFF7A7A7A, PorterDuff.Mode.MULTIPLY);
-        b = (Button) findViewById(R.id.btn_plus);
-        b.getBackground().setColorFilter(0xFF7A7A7A, PorterDuff.Mode.MULTIPLY);
-        b = (Button) findViewById(R.id.btn_result);
-        b.getBackground().setColorFilter(0xFF7A7A7A, PorterDuff.Mode.MULTIPLY);
-        b = (Button) findViewById(R.id.btn_clear);
-        b.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
-        b = (Button) findViewById(R.id.btn_delete);
-        b.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+        for (Button b :colouredButtons) {
+            if(b.getId() == R.id.btn_clear || b.getId() == R.id.btn_delete){
+                b.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+            } else{
+                b.getBackground().setColorFilter(0xFF7A7A7A, PorterDuff.Mode.MULTIPLY);
+            }
+        }
 
         //OnClick Listener for the spinner
         history.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -139,10 +136,20 @@ public class HomeActivity extends Activity {
                 viewID = R.layout.activity_trigonometric;
                 if(savedInstance != null){
                     savedInstance.putInt("VIEW", viewID);
+                    savedInstance.putBoolean("DEGREES", degrees);
                 }
                 onCreate(savedInstance);
                 return true;
 
+            case R.id.basic:
+                // User wants to switch to basic panel
+                viewID = R.layout.activity_home;
+                if(savedInstance != null){
+                    savedInstance.putInt("VIEW", viewID);
+                    savedInstance.putBoolean("DEGREES", degrees);
+                }
+                onCreate(savedInstance);
+                return true;
             default:
                 //error unknown action
                 return super.onOptionsItemSelected(item);
@@ -156,6 +163,7 @@ public class HomeActivity extends Activity {
         TextView textBox = (TextView) findViewById(R.id.txtViewScreen);
         state.putString("TEXT", textBox.getText().toString());
         state.putInt("VIEW", viewID);
+        state.putBoolean("DEGREES", degrees);
     }
 
 //
@@ -233,6 +241,43 @@ public class HomeActivity extends Activity {
                 break;
             case R.id.btn_right_parens:
                 no = ")";
+                break;
+            case R.id.btn_sin:
+                no = "sin(";
+                break;
+            case R.id.btn_cos:
+                no = "cos(";
+                break;
+            case R.id.btn_tan:
+                no = "tan(";
+                break;
+            case R.id.btn_ln:
+                no = "ln(";
+                break;
+            case R.id.btn_log:
+                no = "log(";
+                break;
+            case R.id.btn_exp:
+                no = "exp(";
+                break;
+            case R.id.btn_sqr:
+                no = "sqr(";
+                break;
+            case R.id.btn_fac:
+                no = "fac(";
+                break;
+            case R.id.btn_rec:
+                no = "rec(";
+                break;
+            case R.id.btn_rad_or_deg:
+                Button b = (Button) findViewById(R.id.btn_rad_or_deg);
+                if (degrees){
+                    b.setText("rad");
+                    degrees = false;
+                } else{
+                    b.setText("deg");
+                    degrees = true;
+                }
                 break;
         }
         screen.setText(screen.getText().toString()+no);

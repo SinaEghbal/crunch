@@ -141,23 +141,23 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="4"
+            android:text="ln"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_4" />
+            android:id="@+id/btn_ln" />
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="5"
+            android:text="log"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_5" />
+            android:id="@+id/btn_log" />
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="6"
+            android:text="exp"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_6" />
+            android:id="@+id/btn_exp" />
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -175,23 +175,23 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="1"
+            android:text="sqr"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_1" />
+            android:id="@+id/btn_sqr" />
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="2"
+            android:text="fac"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_2" />
+            android:id="@+id/btn_fac" />
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="3"
+            android:text="rec"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_3" />
+            android:id="@+id/btn_rec" />
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -216,9 +216,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="0"
+            android:text="rad"
             android:onClick="keypadOnClick"
-            android:id="@+id/btn_0" />
+            android:id="@+id/btn_rad_or_deg" />
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"

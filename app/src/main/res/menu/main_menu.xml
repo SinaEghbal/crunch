@@ -7,4 +7,9 @@
         android:icon="@android:drawable/ic_menu_add"
         android:title="Trigonometric panel"
         app:showAsAction="always"/>
+    <item
+        android:id="@+id/basic"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Basic panel"
+        app:showAsAction="always"/>
 </menu>
