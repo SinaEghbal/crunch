@@ -63,7 +63,7 @@ public class HomeActivity extends Activity {
             setContentView(viewID);
         }
 
-        if(degrees)
+        if(degrees && viewID==R.layout.activity_trigonometric)
             ((Button)findViewById(R.id.btn_rad_or_deg)).setText("deg");
         if(expTextView != null) {
             TextView textBox = (TextView) findViewById(R.id.txtViewScreen);
