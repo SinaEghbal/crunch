@@ -11,10 +11,10 @@ public class Term extends BinaryNonTerminal<Float> {
     /* Term has the second lowest priority in our grammar, it implements x, /, and %(modulus)
     * operators */
     boolean degree;
-    public Term(String expression) {
-        super(expression, Features.ARITHMETICOPERATORS);
-        this.operators = new String[]{"x", "/", "%"};
-    }
+//    public Term(String expression) {
+//        super(expression, Features.ARITHMETICOPERATORS);
+//        this.operators = new String[]{"x", "/", "%"};
+//    }
 
     public Term(String expression, boolean degree) {
         super(expression, Features.ARITHMETICOPERATORS);

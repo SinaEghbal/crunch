@@ -12,24 +12,24 @@ public class Factor extends UnaryNonTerminal<Float> {
     float scalar = 1;
     boolean degree;
 
-    public Factor(String expression) {
-        super(expression);
-        decompose();
-    }
-
-    public Factor(String expression, boolean neg) {
-        super(expression);
-        if (neg)
-            scalar = -1;
-        decompose();
-    }
+//    public Factor(String expression) {
+//        super(expression);
+//        decompose();
+//    }
+//
+//    public Factor(String expression, boolean neg) {
+//        super(expression);
+//        if (neg)
+//            scalar = -1;
+//        decompose();
+//    }
 
     public Factor(String expression, boolean neg, boolean degree) {
         super(expression);
         if (neg)
             scalar = -1;
-        decompose();
         this.degree = degree;
+        decompose();
     }
 
     @Override
@@ -41,7 +41,7 @@ public class Factor extends UnaryNonTerminal<Float> {
             super.decompose();
         }
         else if (expression.startsWith("-")){
-            operand = new Factor(expression.substring(1, expression.length()), true);
+            operand = new Factor(expression.substring(1, expression.length()), true, degree);
             super.decompose();
         } else if (expression.startsWith("sin(") || expression.startsWith("cos(") ||
                 expression.startsWith("tan(") || expression.startsWith("sqr(") ||

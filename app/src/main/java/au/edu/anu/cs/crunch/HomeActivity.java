@@ -64,7 +64,8 @@ public class HomeActivity extends Activity {
         }
 
         if(degrees)
-            ((Button)findViewById(R.id.btn_rad_or_deg)).setText("deg");
+            if (R.layout.activity_trigonometric == android.R.id.content)
+                ((Button)findViewById(R.id.btn_rad_or_deg)).setText("deg");
         if(expTextView != null) {
             TextView textBox = (TextView) findViewById(R.id.txtViewScreen);
             textBox.setText(expTextView.getText());
@@ -370,7 +371,7 @@ public class HomeActivity extends Activity {
                 expStr = text.get(0).toString();
                 expStr = expStr.replaceAll("divided by", "/");
                 expStr = expStr.replaceAll("mod[a-z]*", "%");
-                Expression expression = new Expression(expStr);
+                Expression expression = new Expression(expStr, degrees);
                 TextView txtViewScreen = (TextView) findViewById(R.id.txtViewScreen);
                 txtViewScreen.setText(expStr);
             }catch (Exception e){
