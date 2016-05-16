@@ -12,18 +12,6 @@ public class Factor extends UnaryNonTerminal<Float> {
     float scalar = 1;
     boolean degree;
 
-//    public Factor(String expression) {
-//        super(expression);
-//        decompose();
-//    }
-//
-//    public Factor(String expression, boolean neg) {
-//        super(expression);
-//        if (neg)
-//            scalar = -1;
-//        decompose();
-//    }
-
     public Factor(String expression, boolean neg, boolean degree) {
         super(expression);
         if (neg)
@@ -45,7 +33,7 @@ public class Factor extends UnaryNonTerminal<Float> {
             super.decompose();
         } else if (expression.startsWith("sin(") || expression.startsWith("cos(") ||
                 expression.startsWith("tan(") || expression.startsWith("sqr(") ||
-                expression.startsWith("rec(") || expression.startsWith("ln(")
+                expression.startsWith("rec(") || expression.startsWith("lne(")
                 || expression.startsWith("log(") || expression.startsWith("exp(")
                 || expression.startsWith("fac(")){
             operand = new Trigonometric(expression, degree);

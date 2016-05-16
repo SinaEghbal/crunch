@@ -6,7 +6,7 @@ package au.edu.anu.cs.crunch.parser.abstracts;
 public class Features {
     /* Contains the operators for the different calculations.
     * Here arithmetic operators and logical operators.*/
-    public static String[] ARITHMETICOPERATORS = new String[]{"+", "-", "*", "/", "^", "%", "Cos", "Sin"};
+    public static String[] ARITHMETICOPERATORS = new String[]{"+", "-", "×", "/", "^", "%", "Cos", "Sin", "exp", "lne", "fac"};
     public static String[] LOGICALOPERATORS = new String[] {"&", "|", "~", "=", ">", "^"};
 
 //    This class was used to separate expressions from floating numbers. Is not used anymore

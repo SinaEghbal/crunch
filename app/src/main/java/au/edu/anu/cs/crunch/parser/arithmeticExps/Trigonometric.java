@@ -38,7 +38,7 @@ public class Trigonometric extends UnaryNonTerminal<Float> {
             return Float.valueOf((float) Math.sqrt((Float)operand.calculateValue()));
         } else if (expression.startsWith("rec")) {
             return Float.valueOf((float) (1.0/(Float)operand.calculateValue()));
-        } else if (expression.startsWith("ln")) {
+        } else if (expression.startsWith("lne")) {
             return Float.valueOf((float) Math.log((Float) operand.calculateValue()));
         } else if (expression.startsWith("log")) {
             return Float.valueOf((float) Math.log10((Float) operand.calculateValue()));
