@@ -9,16 +9,4 @@ public class Features {
     public static String[] ARITHMETICOPERATORS = new String[]{"+", "-", "×", "/", "^", "%", "Cos", "Sin", "exp", "lne", "fac"};
     public static String[] LOGICALOPERATORS = new String[] {"&", "|", "~", "=", ">", "^"};
 
-//    This class was used to separate expressions from floating numbers. Is not used anymore
-
-//    public static boolean isExpression(String expression, String[] operators){
-//        for (String op: operators) {
-//            if (expression.contains(op) && (!String.valueOf(expression.charAt(0)).equals(op)
-//                    && !String.valueOf(expression.charAt(expression.length()-1)).equals(op))) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
 }

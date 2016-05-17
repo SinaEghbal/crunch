@@ -93,11 +93,4 @@ public abstract class BinaryNonTerminal<T> extends NonTerminal {
         return right;
     }
 
-//    @Override
-//    public String toString() {
-//        if (operator != null)
-//            return left + " " + operator + " " + right;
-//        else
-//            return String.valueOf(right.value);
-//    }
 }

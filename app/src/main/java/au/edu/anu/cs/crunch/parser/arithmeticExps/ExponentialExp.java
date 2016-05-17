@@ -38,10 +38,6 @@ public class ExponentialExp extends BinaryNonTerminal<Float> {
             return (Float) this.left.calculateValue();
         else if (operator.equals("^"))
             return (float) Math.pow((Float)this.left.calculateValue(), (Float)this.right.calculateValue());
-//        switch (operator) {
-//            case "^":
-//                return (float) Math.pow((Float)this.left.calculateValue(), (Float)this.right.calculateValue());
-//        }
         return null;
     }
 }

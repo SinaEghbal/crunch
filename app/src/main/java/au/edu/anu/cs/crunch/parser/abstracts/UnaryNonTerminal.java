@@ -20,9 +20,4 @@ public abstract class UnaryNonTerminal<T> extends NonTerminal {
     public void decompose() {
         operand.decompose();
     }
-
-//    @Override
-//    public String toString() {
-//            return operand.toString();
-//    }
 }

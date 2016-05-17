@@ -24,11 +24,7 @@ public class Trigonometric extends UnaryNonTerminal<Float> {
 
     @Override
     public Float calculateValue() {
-        float val;
-//        if (degree)
-//            val = (float) Math.toRadians((Float)operand.calculateValue());
-//        else
-//            val = (Float)operand.calculateValue();
+//        float val;
         if (expression.startsWith("cos")) {
             return Float.valueOf((float) MathFacade.cos((float)operand.calculateValue(), degree));
         } else if (expression.startsWith("sin")) {

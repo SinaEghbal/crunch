@@ -43,12 +43,6 @@ public class Expression extends BinaryNonTerminal {
             return (Float)this.left.calculateValue() + (Float)this.right.calculateValue();
         else if (operator.equals("-"))
             return (Float)this.left.calculateValue() - (Float)this.right.calculateValue();
-//        switch (operator) {
-//            case "+":
-//                return (Float)this.left.calculateValue() + (Float)this.right.calculateValue();
-//            case "-":
-//                return (Float)this.left.calculateValue() - (Float)this.right.calculateValue();
-//        }
         return (float)0;
     }
 }

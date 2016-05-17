@@ -198,22 +198,6 @@ public class HomeActivity extends Activity {
         state.putBoolean("DEGREES", degrees);
     }
 
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
     public void keypadOnClick(View view) {
         /*Implementation for the keypad buttons.
         * implements the functionality of the keypad keys based on the key id.*/
