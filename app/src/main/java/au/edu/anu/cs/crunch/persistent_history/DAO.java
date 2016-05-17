@@ -1,6 +1,5 @@
 package au.edu.anu.cs.crunch.persistent_history;
 
-import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,10 +13,13 @@ public class DAO implements IDAO {
     public DAO(Context activity) {
         dbHelper = new DBHelper(activity);
     }
+
+    @Override
     public SQLiteDatabase getWritableDatabase() {
         return dbHelper.getWritableDatabase();
     }
 
+    @Override
     public SQLiteDatabase getReadableDatabase() {
         return dbHelper.getReadableDatabase();
     }
