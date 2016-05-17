@@ -30,6 +30,14 @@ public class DatabaseTest extends AndroidTestCase {
         dao.insertExpression("a&b", CalculatorDB.Logic.TABLE_NAME);
         int after = dao.getExpressions(CalculatorDB.Logic.TABLE_NAME).getCount();
         assertEquals(after, before + 1);
+        //test that the expression exists in the db
+        Cursor cursor = dao.getExpressions(CalculatorDB.Logic.TABLE_NAME);
+        boolean exists = false;
+        while (cursor.moveToNext()) {
+            if (cursor.getString(cursor.getColumnIndex(CalculatorDB.EXPRESSION)).equals("a&b"))
+                exists = true;
+        }
+        assertTrue(exists);
     }
     public void testInsertAndGetArithmeticExpression() {
         //Arithmetic
@@ -41,6 +49,18 @@ public class DatabaseTest extends AndroidTestCase {
         dao.getExpressions(CalculatorDB.Arithmetic.TABLE_NAME);
         int after = dao.getExpressions(CalculatorDB.Arithmetic.TABLE_NAME).getCount();
         assertNotSame(after,before);
+
+        //test that the expression exists in the db
+        Cursor cursor = dao.getExpressions(CalculatorDB.Arithmetic.TABLE_NAME);
+        String[] tested = new String[] {"1+2", "Sin(90)", "Exp(12), lne(fac(12))"};
+        boolean exists = false;
+        for (String current: tested) {
+            while (cursor.moveToNext()) {
+                if (cursor.getString(cursor.getColumnIndex(CalculatorDB.EXPRESSION)).equals(current))
+                    exists = true;
+            }
+            assertTrue(exists);
+        }
     }
 
     public void testDeleteAndGetExpression() {
@@ -48,11 +68,20 @@ public class DatabaseTest extends AndroidTestCase {
         Cursor cursor = dao.getExpressions(CalculatorDB.Logic.TABLE_NAME);
         int before = cursor.getCount();
         while (cursor.moveToNext()) {
-            String id = cursor.getString(cursor.getColumnIndex(CalculatorDB.Logic._ID));
+            String id = cursor.getString(cursor.getColumnIndex(CalculatorDB.EXP_ID));
+            String exp = cursor.getString(cursor.getColumnIndex(CalculatorDB.EXPRESSION));
             dao.deleteExpression(id, CalculatorDB.Logic.TABLE_NAME);
             cursor = dao.getExpressions(CalculatorDB.Logic.TABLE_NAME);
             int after = cursor.getCount();
             assertEquals(after, before - 1);
+            // Makes sure the string does not exist in the db anymore
+            boolean exists = false;
+            while (cursor.moveToNext()) {
+                if (cursor.getString(cursor.getColumnIndex(CalculatorDB.EXPRESSION)).equals(exp)) {
+                    exists = true;
+                }
+                assertEquals(exists, false);
+            }
         }
     }
     public void testDeleteAndGetArithmeticExpression() {
@@ -61,10 +90,19 @@ public class DatabaseTest extends AndroidTestCase {
         int before = cursor.getCount();
         while (cursor.moveToNext()) {
             String id = cursor.getString(cursor.getColumnIndex(CalculatorDB.Arithmetic._ID));
+            String exp = cursor.getString(cursor.getColumnIndex(CalculatorDB.EXPRESSION));
             dao.deleteExpression(id, CalculatorDB.Arithmetic.TABLE_NAME);
             cursor = dao.getExpressions(CalculatorDB.Arithmetic.TABLE_NAME);
             int after = cursor.getCount();
             assertEquals(after, before-1);
+            // Again, makes sure the particular string that we deleted does not exist in the db
+            boolean exists = false;
+            while (cursor.moveToNext()) {
+                if (cursor.getString(cursor.getColumnIndex(CalculatorDB.EXPRESSION)).equals(exp)) {
+                    exists = true;
+                }
+                assertEquals(exists, false);
+            }
         }
     }
 }

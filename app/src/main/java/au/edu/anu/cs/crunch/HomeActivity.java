@@ -95,15 +95,17 @@ public class HomeActivity extends Activity {
         }
 
 
-        /*For deleting a particular record from the expression history*/
-        history.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), (int) id, Toast.LENGTH_LONG).show();
-                return true;
-            }
-        });
-
+        /* For deleting a particular record from the expression history
+         * db query tested and works, however due to limitation of spinner does not function and
+         * therefore it was commented out. */
+//        history.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(getApplicationContext(), (int) id, Toast.LENGTH_LONG).show();
+//                return true;
+//            }
+//        });
+//
         //OnClick Listener for the spinner
         history.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
