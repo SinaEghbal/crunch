@@ -2,6 +2,7 @@ package au.edu.anu.cs.crunch.parser.abstracts;
 
 /**
  * Created by sina on 4/27/16.
+ * contributions by Boris
  */
 
 public abstract class NonTerminal<T> {
@@ -20,5 +21,21 @@ public abstract class NonTerminal<T> {
     }
 
     public abstract void decompose();
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public String getExpression() {
+        return expression;
+    }
+
+    public String[] getOperators() {
+        return operators;
+    }
+
+    public T getValue() {
+        return value;
+    }
 //    public abstract String toString();
 }

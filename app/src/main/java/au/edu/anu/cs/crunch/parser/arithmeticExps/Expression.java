@@ -6,7 +6,7 @@ import au.edu.anu.cs.crunch.parser.abstracts.NonTerminal;
 
 /**
  * Created by sina on 4/27/16.
- * contributions by Boris
+ * Contributions by Boris
  */
 public class Expression extends BinaryNonTerminal {
     /* This is the class we instantiate to evaluate the arithmetic expressions.

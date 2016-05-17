@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 /**
  * Created by sina on 4/29/16.
+ * Contributions by Boris
  */
 public abstract class BinaryNonTerminal<T> extends NonTerminal {
     /* This class extends NonTerminal and will be extended by all the binary operators
@@ -82,6 +83,14 @@ public abstract class BinaryNonTerminal<T> extends NonTerminal {
             }
         }
         return count;
+    }
+
+    public NonTerminal getLeft() {
+        return left;
+    }
+
+    public NonTerminal getRight() {
+        return right;
     }
 
 //    @Override
