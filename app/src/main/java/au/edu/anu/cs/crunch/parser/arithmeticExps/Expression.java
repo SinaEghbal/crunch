@@ -12,17 +12,12 @@ public class Expression extends BinaryNonTerminal {
     * It starts with decomposing the expressions by the lowest priorority operators
     * (Here -,+)*/
     boolean degree;
-    public Expression(String expression) {
-        super(expression, Features.ARITHMETICOPERATORS);
-        this.operators = new String[]{"+", "-"};
-        this.decompose();
-    }
 
     public Expression(String expression, boolean degree) {
         super(expression, Features.ARITHMETICOPERATORS);
         this.operators = new String[] {"+", "-"};
-        this.decompose();
         this.degree = degree;
+        this.decompose();
     }
 
     @Override

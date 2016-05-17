@@ -162,7 +162,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="x"
+            android:text="×"
             android:onClick="keypadOnClick"
             android:id="@+id/btn_times" />
     </LinearLayout>

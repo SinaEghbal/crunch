@@ -248,7 +248,7 @@ public class HomeActivity extends Activity {
                 no = "+";
                 break;
             case R.id.btn_times:
-                no = "x";
+                no = "×";
                 break;
             case R.id.btn_division:
                 no = "/";
@@ -269,7 +269,7 @@ public class HomeActivity extends Activity {
                 no = "tan(";
                 break;
             case R.id.btn_ln:
-                no = "ln(";
+                no = "lne(";
                 break;
             case R.id.btn_log:
                 no = "log(";
@@ -344,6 +344,8 @@ public class HomeActivity extends Activity {
                 } catch (Exception e) {
                     /*If the string is not parsable, show a toast*/
                     Toast.makeText(getBaseContext(), "Non-parsable expression", Toast.LENGTH_LONG).show();
+                    // For debugging purposes
+                    // throw e;
                 }
                 break;
         }
@@ -361,7 +363,6 @@ public class HomeActivity extends Activity {
     //Listener for voice recognition intents
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         if (requestCode == RECOG && resultCode == RESULT_OK){
             ArrayList<String> text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             // catch expression if not parsable
@@ -370,7 +371,7 @@ public class HomeActivity extends Activity {
                 expStr = text.get(0).toString();
                 expStr = expStr.replaceAll("divided by", "/");
                 expStr = expStr.replaceAll("mod[a-z]*", "%");
-                Expression expression = new Expression(expStr);
+                Expression expression = new Expression(expStr, degrees);
                 TextView txtViewScreen = (TextView) findViewById(R.id.txtViewScreen);
                 txtViewScreen.setText(expStr);
             }catch (Exception e){

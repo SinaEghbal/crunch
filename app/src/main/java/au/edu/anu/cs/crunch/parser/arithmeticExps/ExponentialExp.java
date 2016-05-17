@@ -12,11 +12,6 @@ public class ExponentialExp extends BinaryNonTerminal<Float> {
     * For exponential expressions. */
     boolean degree;
 
-    public ExponentialExp(String expression) {
-        super(expression, Features.ARITHMETICOPERATORS);
-        this.operators = new String[]{"^"};
-    }
-
     public ExponentialExp(String expression, boolean degree) {
         super(expression, Features.ARITHMETICOPERATORS);
         this.operators = new String[]{"^"};
@@ -25,7 +20,7 @@ public class ExponentialExp extends BinaryNonTerminal<Float> {
 
     @Override
     public NonTerminal createNonTerminalLeft(String expression) {
-        Factor factor = new Factor(expression, degree);
+        Factor factor = new Factor(expression, false, degree);
         factor.decompose();
         return factor;
     }

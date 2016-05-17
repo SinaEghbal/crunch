@@ -11,14 +11,10 @@ public class Term extends BinaryNonTerminal<Float> {
     /* Term has the second lowest priority in our grammar, it implements x, /, and %(modulus)
     * operators */
     boolean degree;
-    public Term(String expression) {
-        super(expression, Features.ARITHMETICOPERATORS);
-        this.operators = new String[]{"x", "/", "%"};
-    }
 
     public Term(String expression, boolean degree) {
         super(expression, Features.ARITHMETICOPERATORS);
-        this.operators = new String[]{"x", "/", "%"};
+        this.operators = new String[]{"×", "/", "%"};
         this.degree = degree;
     }
 
@@ -40,7 +36,7 @@ public class Term extends BinaryNonTerminal<Float> {
     public Float calculateValue() {
         if (operator==null)
             return (Float)this.left.calculateValue();
-        else if (operator.equals("x"))
+        else if (operator.equals("×"))
             return (Float)this.left.calculateValue() * (Float)this.right.calculateValue();
         else if (operator.equals("/"))
             return (Float)this.left.calculateValue() / (Float)this.right.calculateValue();

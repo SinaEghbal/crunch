@@ -17,7 +17,7 @@ public class Trigonometric extends UnaryNonTerminal<Float> {
 
     @Override
     public void decompose() {
-        operand = new Expression(expression.substring(4, expression.length()-1));
+        operand = new Expression(expression.substring(4, expression.length()-1), degree);
         super.decompose();
     }
 
@@ -25,7 +25,7 @@ public class Trigonometric extends UnaryNonTerminal<Float> {
     public Float calculateValue() {
         float val;
         if (degree)
-            val = (float) Math.toDegrees((Float)operand.calculateValue());
+            val = (float) Math.toRadians((Float)operand.calculateValue());
         else
             val = (Float)operand.calculateValue();
         if (expression.startsWith("cos")) {
@@ -38,7 +38,7 @@ public class Trigonometric extends UnaryNonTerminal<Float> {
             return Float.valueOf((float) Math.sqrt((Float)operand.calculateValue()));
         } else if (expression.startsWith("rec")) {
             return Float.valueOf((float) (1.0/(Float)operand.calculateValue()));
-        } else if (expression.startsWith("ln")) {
+        } else if (expression.startsWith("lne")) {
             return Float.valueOf((float) Math.log((Float) operand.calculateValue()));
         } else if (expression.startsWith("log")) {
             return Float.valueOf((float) Math.log10((Float) operand.calculateValue()));
