@@ -13,11 +13,13 @@ import android.widget.*;
 
 import au.edu.anu.cs.crunch.parser.arithmeticExps.Expression;
 import au.edu.anu.cs.crunch.persistent_history.CalculatorDB;
+import au.edu.anu.cs.crunch.persistent_history.DAO;
 import au.edu.anu.cs.crunch.persistent_history.DBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.TooManyListenersException;
 
 /**
  * Created by sina on 5/10/16.
@@ -31,7 +33,7 @@ public class HomeActivity extends Activity {
     private static final int ACTIVITY = 0;
 
     TextView expTextView;
-    DBHelper calculatorHelper;
+    DAO calculatorHelper;
     Spinner history;
     String tableName;
     boolean answer;
@@ -71,7 +73,7 @@ public class HomeActivity extends Activity {
         }
 
         expTextView = (TextView)findViewById(R.id.txtViewScreen);
-        calculatorHelper = new DBHelper(this);
+        calculatorHelper = new DAO(this);
         history = (Spinner) findViewById(R.id.spinner_history);
         tableName = CalculatorDB.Logic.TABLE_NAME;
         loadSpinner();
@@ -92,6 +94,16 @@ public class HomeActivity extends Activity {
             }
         }
 
+
+        /*For deleting a particular record from the expression history*/
+        history.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(), (int) id, Toast.LENGTH_LONG).show();
+                return true;
+            }
+        });
+
         //OnClick Listener for the spinner
         history.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -111,6 +123,7 @@ public class HomeActivity extends Activity {
                 return;
             }
         });
+
         //For arithmetic expression. Should be changed for the logical expressions.
         answer = false;
 
