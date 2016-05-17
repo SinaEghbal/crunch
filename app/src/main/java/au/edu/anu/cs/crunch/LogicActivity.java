@@ -23,6 +23,7 @@ import java.util.Locale;
 import au.edu.anu.cs.crunch.parser.abstracts.NonTerminal;
 import au.edu.anu.cs.crunch.parser.logicalExps.LogicalExpression;
 import au.edu.anu.cs.crunch.persistent_history.CalculatorDB;
+import au.edu.anu.cs.crunch.persistent_history.DAO;
 import au.edu.anu.cs.crunch.persistent_history.DBHelper;
 
 /**
@@ -34,7 +35,7 @@ public class LogicActivity extends Activity{
     private static final int ACTIVITY = 0;
 
     TextView expTextView;
-    DBHelper calculatorHelper;
+    DAO calculatorHelper;
     Spinner history;
     String tableName;
     boolean answer;
@@ -59,7 +60,7 @@ public class LogicActivity extends Activity{
 
 
         expTextView = (TextView)findViewById(R.id.txtViewScreen);
-        calculatorHelper = new DBHelper(this);
+        calculatorHelper = new DAO(this);
         history = (Spinner) findViewById(R.id.spinner_history);
         tableName = CalculatorDB.Arithmetic.TABLE_NAME;
         loadSpinner();

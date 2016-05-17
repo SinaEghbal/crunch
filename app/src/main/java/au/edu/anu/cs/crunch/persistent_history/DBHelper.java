@@ -24,11 +24,11 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String TEXT_TYPE = " TEXT";
     public static final String INT_TYPE = "INTEGER";
 
-    public static final String CREATE_TABLE_ARITHMETIC = "CREATE TABLE " + CalculatorDB.Arithmetic.TABLE_NAME +
+    public static final String CREATE_TABLE_ARITHMETIC = "CREATE TABLE IF NOT EXISTS " + CalculatorDB.Arithmetic.TABLE_NAME +
             "(" + CalculatorDB.EXP_ID + " " + INT_TYPE +
             ", " + CalculatorDB.EXPRESSION + TEXT_TYPE + ");";
 
-    public static final String CREATE_TABLE_LOGIC = " CREATE TABLE "+ CalculatorDB.Logic.TABLE_NAME + "(" + CalculatorDB.EXP_ID + " " + INT_TYPE +
+    public static final String CREATE_TABLE_LOGIC = " CREATE TABLE IF NOT EXISTS "+ CalculatorDB.Logic.TABLE_NAME + "(" + CalculatorDB.EXP_ID + " " + INT_TYPE +
             ", " + CalculatorDB.EXPRESSION + TEXT_TYPE + ");";
 
     public static final String DROP_ENTRIES =
@@ -66,5 +66,11 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put(CalculatorDB.EXP_ID, idGenerator.nextInt(1000000));
         cv.put(CalculatorDB.EXPRESSION, expression);
         db.insert(tableName, null, cv);
+    }
+
+    public void deleteExpression(String id, String table) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + table + "WHERE " + CalculatorDB.EXP_ID + " = " + id;
+        db.execSQL(query);
     }
 }
