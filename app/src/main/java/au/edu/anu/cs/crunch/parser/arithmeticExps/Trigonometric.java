@@ -1,5 +1,6 @@
 package au.edu.anu.cs.crunch.parser.arithmeticExps;
 
+import au.edu.anu.cs.crunch.MathFacade;
 import au.edu.anu.cs.crunch.parser.abstracts.UnaryNonTerminal;
 
 /**
@@ -24,16 +25,16 @@ public class Trigonometric extends UnaryNonTerminal<Float> {
     @Override
     public Float calculateValue() {
         float val;
-        if (degree)
-            val = (float) Math.toRadians((Float)operand.calculateValue());
-        else
-            val = (Float)operand.calculateValue();
+//        if (degree)
+//            val = (float) Math.toRadians((Float)operand.calculateValue());
+//        else
+//            val = (Float)operand.calculateValue();
         if (expression.startsWith("cos")) {
-            return Float.valueOf((float) Math.cos(val));
+            return Float.valueOf((float) MathFacade.cos((float)operand.calculateValue(), degree));
         } else if (expression.startsWith("sin")) {
-            return Float.valueOf((float) Math.sin(val));
+            return Float.valueOf((float) MathFacade.sin((float)operand.calculateValue(), degree));
         } else if (expression.startsWith("tan")) {
-            return Float.valueOf((float) Math.tan(val));
+            return Float.valueOf((float) MathFacade.tan((float)operand.calculateValue(), degree));
         } else if (expression.startsWith("sqr")) {
             return Float.valueOf((float) Math.sqrt((Float)operand.calculateValue()));
         } else if (expression.startsWith("rec")) {
