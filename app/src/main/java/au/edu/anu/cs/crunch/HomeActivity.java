@@ -342,9 +342,9 @@ public class HomeActivity extends Activity {
                     answer = true;
                 } catch (Exception e) {
                     /*If the string is not parsable, show a toast*/
-                    Toast.makeText(getBaseContext(), "Non-parsable expression", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getBaseContext(), "Non-parsable expression", Toast.LENGTH_LONG).show();
                     // For debugging purposes
-                    // throw e;
+                     throw e;
                 }
                 break;
         }
@@ -374,7 +374,8 @@ public class HomeActivity extends Activity {
                 TextView txtViewScreen = (TextView) findViewById(R.id.txtViewScreen);
                 txtViewScreen.setText(expStr);
             }catch (Exception e){
-                Toast.makeText(getBaseContext(),expStr + " Not parsable", Toast.LENGTH_LONG).show();
+                throw e;
+//                Toast.makeText(getBaseContext(),expStr + " Not parsable", Toast.LENGTH_LONG).show();
             }
         } else if(requestCode == ACTIVITY) {
             this.finish();

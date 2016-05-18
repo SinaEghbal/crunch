@@ -40,7 +40,12 @@ public class Factor extends UnaryNonTerminal<Float> {
             super.decompose();
         }
         else {
-            value = Float.valueOf(expression);
+            try {
+                value = Float.valueOf(expression);
+            } catch (Exception e) {
+                Expression exp = new Expression(expression, degree);
+                value = Float.valueOf(exp.calculateValue());
+            }
         }
     }
 
