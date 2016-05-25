@@ -18,9 +18,5 @@
         <processorPath useClasspath="true" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.7">
-      <module name="calculator" target="1.8" />
-      <module name="COMP6442-Assignment2-2016" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/trig"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Trigonometric panel"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/basic"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Basic panel"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/logic"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Logic panel"
+        app:showAsAction="always"/>
+</menu>

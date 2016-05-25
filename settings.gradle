@@ -1,1 +1,1 @@
-include ':calculator'
+include ':app'
